@@ -70,6 +70,38 @@ present("Felix", 5, 10, -3, -1);
 present("Betty", 5, 35, -4, 0);
 present("April", 5, 62, -3, 1);
 present("Rhonda", 5, 90, -3, 1);
-
 }
-keyrings3();
+
+module keyrings4() {
+present("Alexander", 5, 10, -3, 1);
+present("Charlotte", 6, 55.5, -4, 0);
+present("Samantha", 4, 33, -2, 1);
+present("Isabella", 4, 78, -2, 0);
+present("Alannah", 5, 101, -3, 1);
+rotate([0,0,90]) {
+present("Alannah", 9, -80, -3, 1);   
+present("Jett", 7, -103, -3, 0);
+present("Jett", 45, -103, -3, 0);
+}
+present("Jack", 70, 99, -3, 0);
+present("Ava", 64, 77, -3, 1);
+}
+
+module keyrings5() {
+present("Lachlan", 3, 10, -2, 1);
+present("Miller", 5, 32.5, -4, 0);
+present("David", 5, 55, -4, 0);
+present("Heidi", 5, 76.5, -4, 0);
+present("Archie", 4, 99, -3, 1);
+present("James", 5, 120, -4, 0);
+present("Molly", 50, 85, -3, 0);
+present("Liam", 65.5, 10, -2, 1);
+present("Marcus", 55, 119, -4, 0);
+rotate([0,0,90]) {
+    
+    present("Mrs. Pearson", 25.5, -99, -3, 0);
+    present("Ryder", 30, -67, -3, 1);
+}
+}
+
+keyrings5();
