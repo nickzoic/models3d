@@ -25,12 +25,14 @@ difference() {
     translate([13,-4.5,33]) cube([100,9,5]);
     translate([-113,-4.5,33]) cube([100,9,5]);
     
-    // motor nose support 
+    // cutout around shaft & motor nose 
     translate([0,0,23]) {
         difference() {
             cylinder(d=28,h=30);
-            rotate([0,0,45]) cube([100,12,60], center=true);
-            cylinder(d=19.5,h=30);
+            rotate([0,0,45]) {
+                translate([-12.5,0,0]) cylinder(d=11,h=30);
+                translate([+12.5,0,0]) cylinder(d=11,h=30);
+            }
         }       
         cylinder(d=13.25,h=30);
     }

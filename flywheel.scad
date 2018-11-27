@@ -32,15 +32,15 @@ difference() {
 nh = 15;
 
 difference() {
-    cylinder(d=120,h=30);
+    cylinder(d=118,h=30);
     cylinder(d=10,h=30);
-    translate([0,0,10]) cylinder(d=79,h=30);
+    translate([0,0,10]) cylinder(d=78,h=30);
     
     for (i = [0:4]) {
         rotate([0,0,i*360/5]) translate([24,0,-1]) cylinder(d=26,h=22);
     }
     for (i = [0:nh-1]) {
-        rotate([0,0,i*360/nh]) translate([49.75,0,6]) union() {
+        rotate([0,0,i*360/nh]) translate([49,0,6]) union() {
             cylinder(d=18.5, h=30);
             sphere(d=18.5);
         }
