@@ -19,13 +19,15 @@ module my_gear() {
     }    
 }
 
-translate([0,0,0]) {
+translate([0,0,10]) {
 difference() {
     union() {
-        cylinder(d=15, h=22);
-        cylinder(d=20, h=11);
+        cylinder(d=15, h=12);
+        cylinder(d=20, h=1);
     }
-    translate([0,0,17]) my_gear();
+    translate([0,0,7]) my_gear();
+    cylinder(d=3,h=100,center=true);
+
 }
 }
 
@@ -33,7 +35,6 @@ nh = 15;
 
 difference() {
     cylinder(d=118,h=30);
-    cylinder(d=10,h=30);
     translate([0,0,10]) cylinder(d=78,h=30);
     
     for (i = [0:4]) {
@@ -45,4 +46,6 @@ difference() {
             sphere(d=18.5);
         }
     }
+    cylinder(d=3,h=100,center=true);
+    translate([0,0,1]) rotate([0,180,0]) linear_extrude(2) text("1.2", halign="center", valign="center");    
 }
