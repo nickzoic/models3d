@@ -2,10 +2,10 @@ $fn=100;
 
 d1 = 20;
 d2 = 35;
-x = 96;
+x = 93;
 y = 108;
 yo = 15;
-z = 20;
+z = 15;
 t = 3;
 
 xd = 7;
@@ -86,20 +86,13 @@ module rail_mount() {
 }
 
 module screw_mount() {
-    
     translate([0,yo,0]) cylinder(d=xd,h=z+t+1);
     translate([0,yo+yd1/6,0]) cylinder(d=xd,h=z+t+1);
     translate([0,yo-yd1/6,0]) cylinder(d=xd,h=z+t+1);
     translate([0,yo+yd1/12,0]) cylinder(d=xd,h=z+t+1);
     translate([0,yo-yd1/12,0]) cylinder(d=xd,h=z+t+1);
-    
     translate([0,yo,z-yd2+yd1]) cylinder(d1=yd2, d2=yd1, h=yd2-yd1);
 }
-
-/*difference() {
-    tripod();
-    screw_mount();
-}*/
 
 difference() {
     union() {

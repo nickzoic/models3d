@@ -1,13 +1,13 @@
 $fn=40;
 
 e = "BLN-1"; // engraving
-l = 49; // battery length
-w = 34; // battery width
-h = 15; // battery height
+l = 51; // battery length
+w = 36.5; // battery width
+h = 16.0; // battery height
 n = 3; // number of batteries
 t = 3; // thickness of walls
 f = 23; // finger cutout size
-x = 2; // size of eject hole
+x = 3; // size of eject hole
 
 difference() {
     minkowski() {
