@@ -9,15 +9,16 @@ z = 20;
 t = 3;
 
 xd = 7;
-yd1 = 15;
+yd1 = 20;
 yd2 = 50;
 
-rw = 38.25; // rail width
+rw = 38.75; // rail width
 rv = 2; // rail vertical
 rt = 3.5; // rail triangular cut
 rh = 10; // rail vertical clearance
 rl = 35; // rail length
 rx = 5; // rail thickness
+rx2 = 7.5; // rail thickness (back)
 rz = 1; // rail edge bevel
 
 module rail() {
@@ -34,9 +35,9 @@ module rail() {
             [rw/2,rv],        // G
             [+rw/2-rt+rz,rv+rt-rz],
             [+rw/2-rt+rz,rv+rt], // H
-            [+rw/2+rx-rz,rv+rt],
-            [+rw/2+rx,rv+rt-rz], // I
-            [+rw/2+rx,-rx*1.5]    // J
+            [+rw/2+rx2-rz,rv+rt],
+            [+rw/2+rx2,rv+rt-rz], // I
+            [+rw/2+rx2,-rx*1.5]    // J
         ]);
     }
 }     
@@ -75,8 +76,8 @@ module rail_mount() {
         linear_extrude(100) {
             polygon(points=[
                 [-rl/2,-rw/2-rx+yo],
-                [-rl/4,rw/2+rx+yo],
-                [rl/4,rw/2+rx+yo],
+                [-rl/4,rw/2+rx2+yo],
+                [rl/4,rw/2+rx2+yo],
                 [rl/2,-rw/2-rx+yo]
             ]);
         }
@@ -85,7 +86,13 @@ module rail_mount() {
 }
 
 module screw_mount() {
+    
     translate([0,yo,0]) cylinder(d=xd,h=z+t+1);
+    translate([0,yo+yd1/6,0]) cylinder(d=xd,h=z+t+1);
+    translate([0,yo-yd1/6,0]) cylinder(d=xd,h=z+t+1);
+    translate([0,yo+yd1/12,0]) cylinder(d=xd,h=z+t+1);
+    translate([0,yo-yd1/12,0]) cylinder(d=xd,h=z+t+1);
+    
     translate([0,yo,z-yd2+yd1]) cylinder(d1=yd2, d2=yd1, h=yd2-yd1);
 }
 
