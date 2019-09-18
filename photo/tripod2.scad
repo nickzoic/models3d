@@ -39,14 +39,26 @@ difference() {
         translate([+x/2,-y/2,-t]) cylinder(d1=d1/2, d2=d1, h=t);
         translate([0,y/2,-t]) cylinder(d1=d1/2, d2=d1, h=t);
         
-        // little bar which stops the clamp rotating
-        hull() {
+        // little pins which stop the clamp rotating
             translate([-7,yo,z+t]) cylinder(d=4,h=2);
             translate([+7,yo,z+t]) cylinder(d=4,h=2);
-        }
+        
     }
     
     // screw hole and relief
     translate([0,yo,0]) cylinder(d=xd,h=z+t+4);
-    translate([0,yo,z-yd2+yd1]) cylinder(d1=yd2, d2=yd1, h=yd2-yd1);
+    translate([0,yo,z-yd2+yd1-2]) cylinder(d1=yd2, d2=yd1, h=yd2-yd1);
+    
+    // experimental: some teeny holes which cause the slicer
+    // to make tubes around them
+    
+    translate([-7,yo,0]) cylinder(d=0.5,h=100);
+    translate([+7,yo,0]) cylinder(d=0.5,h=100);
+    translate([0,yo-7,0]) cylinder(d=0.5,h=100);
+    translate([0,yo+7,0]) cylinder(d=0.5,h=100);
+    
+    translate([-x/2,-y/2,0]) cylinder(d=6, h=100, center=true);
+    translate([+x/2,-y/2,0]) cylinder(d=6, h=100, center=true);
+    translate([0,y/2,0]) cylinder(d=6, h=100, center=true);
+    
 }
