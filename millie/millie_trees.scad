@@ -21,9 +21,15 @@ difference() {
            
         }
     }
-    translate([0,0,1]) rotate([0,180,0]) linear_extrude(2) text("Amelia 2019",halign="center",valign="center");
+    translate([0,0,-1]) cylinder(d1=66,d2=0,h=30);
+    //sphere(d=50);
+    rotate([0,0,-60]) translate([0,39,1]) rotate([0,180,0]) linear_extrude(2) text("AMELIA",halign="center",valign="center", font="impact");
+    rotate([0,0,60]) translate([0,39,1]) rotate([0,180,0]) linear_extrude(2) text("MOORE",halign="center",valign="center", font="impact");
+    
+    translate([0,-40,1]) rotate([0,180,0]) linear_extrude(2) text("~2019~",halign="center",valign="center", font="impact");
 }
 
+/*
 for(x = [0:20:60]) {
     translate([x-30,60,40]) rotate([0,180,30]) tree();
 }
@@ -33,4 +39,4 @@ for(x = [-42,+42]) {
         translate([x,y,40]) rotate([0,180,0]) tree();
     }
 }
-        
+  */      
