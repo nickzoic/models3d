@@ -1,11 +1,12 @@
 $fn=100;
 
 // didn't actually measure this yet
-fx = 50;
-fy = 25;
+fx = 61;
+fy = 34.5;
+fr = 1;  // corner radius
 
-d1 = 40;  // inner cutout
-d2 = 66;  // inner sleeve
+d1 = 45;  // inner cutout
+d2 = 72;  // inner sleeve
 d3 = 83;  // outer large ring
 d4 = 78;  // outer snap diameter
 d5 = 90;  // outside diameter
@@ -37,5 +38,11 @@ difference() {
         [d1/2,0],
     ]);
   }
-  cube([fx,fy,100], center=true);
+  hull() {
+      for (x = [-fx/2+fr,+fx/2-fr]) {
+          for (y = [-fy/2+fr,+fy/2-fr]) {
+              translate([x,y,0]) cylinder(d=fr*2,h=100,center=true);
+          }
+      }
+  }   
 }  
