@@ -14,8 +14,8 @@ sh = 2;   // pickup surround height
 // plate dimensions
 
 d1 = 100;  // outer diameter
-t1 = 1;     // thickness below bevel
-t2 = 2;     // thickness of 45deg bevel
+t1 = 0.75;     // thickness below bevel
+t2 = 1.75;     // thickness of 45deg bevel
 
 psh = 6;  // pickup screw head
 pss = 3;  // pickup screw shaft
