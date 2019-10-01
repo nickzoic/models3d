@@ -1,3 +1,5 @@
+$fn=64;
+
 width = 71; 
 length = 146;
 height = 8.0;
@@ -5,6 +7,7 @@ radius = 5;  // check
 
 thick = 1.5;   // case thickness 
 border = 10;
+bumper = 2.5;
 
 w = width - 2 * radius - height;
 l = length - 2 * radius - height;
@@ -28,8 +31,8 @@ module cutout() {
     hull() {
         for (x = [-w/2,+w/2]) {
             for (y = [-l/2,+l/2]) {
-                translate([x,y,height/2]) {
-                    cylinder(r=radius,h=thick);
+                translate([x,y,height/2-1]) {
+                    cylinder(r=radius,h=thick+bumper+2);
                 }
             }
         }
@@ -50,9 +53,9 @@ module split() {
 module bumpers() {
     for (x = [-w/2,+w/2]) {
         for (y = [-l/2,+l/2]) {
-            translate([x,y,1]) {
+            translate([x,y,bumper/2]) {
                 minkowski() {
-                    sphere(d=height+);
+                    sphere(d=height+bumper);
                     cylinder(r=radius,h=0.000000001);
                 }
 
