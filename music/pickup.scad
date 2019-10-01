@@ -7,15 +7,15 @@ px2 = 3.472 * 25.4;
 // plate dimensions
 
 d1 = 107;
-t1 = 1;
-t2 = 2;
+t1 = 0.75;
+t2 = 1.75;
 sd1 = 3.5;
 
 sd2 = 3;
 sd3 = 5;
 
 pa = -30;
-yo = 10;
+yo = 6;
 
 $fn = 100;
 
@@ -23,7 +23,7 @@ intersection() {
     difference() {
         union() {
             cylinder(h=t1,d=d1);
-            translate([0,0,1]) cylinder(h=t2,d1=d1,d2=d1-t2*2);
+            translate([0,0,t1]) cylinder(h=t2,d1=d1,d2=d1-t2*2);
         }
         rotate([0,0,pa]) {
             hull() {
@@ -43,3 +43,5 @@ intersection() {
     }
     translate([0,-yo,0]) cube([d1,d1,20], center=true);
 }
+
+//translate([0,d1/2,2]) cube([49,2*yo,4],center=true);
