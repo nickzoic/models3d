@@ -7,8 +7,8 @@ $fn=100;
 
 d1 = 20;
 d2 = 40;
-x = 93;
-y = 108;
+x = 97;
+y = 112;
 yo = 10;
 z = 15;
 t = 3;
@@ -40,8 +40,8 @@ difference() {
         translate([0,y/2,-t]) cylinder(d1=d1/2, d2=d1, h=t);
         
         // little pins which stop the clamp rotating
-            translate([-7,yo,z+t]) cylinder(d=4,h=2);
-            translate([+7,yo,z+t]) cylinder(d=4,h=2);
+        translate([-7.5,yo,z+t]) cylinder(d=4,h=2);
+        translate([+7.5,yo,z+t]) cylinder(d=4,h=2);
         
     }
     
@@ -52,10 +52,9 @@ difference() {
     // experimental: some teeny holes which cause the slicer
     // to make tubes around them
     
-    translate([-7,yo,0]) cylinder(d=0.5,h=100);
-    translate([+7,yo,0]) cylinder(d=0.5,h=100);
-    translate([0,yo-7,0]) cylinder(d=0.5,h=100);
-    translate([0,yo+7,0]) cylinder(d=0.5,h=100);
+    for (a = [0:30:360]) {
+        translate([0,yo,0]) rotate([0,0,a]) translate([7.5,0,0]) cylinder(d=0.5,h=100);
+    }
     
     translate([-x/2,-y/2,0]) cylinder(d=6, h=100, center=true);
     translate([+x/2,-y/2,0]) cylinder(d=6, h=100, center=true);
