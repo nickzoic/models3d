@@ -38,7 +38,7 @@ ny = 40;  // offset of neck away from center
 difference() {
     union() {
         cylinder(h=t1,d=d1);
-        translate([0,0,1]) cylinder(h=t2,d1=d1,d2=d1-t2*2);
+        translate([0,0,t1]) cylinder(h=t2,d1=d1,d2=d1-t2*2);
         rotate([0,0,pa]) {
             hull() {
                 translate([-pl/2+pw/4,+pw/4,0]) cylinder(d=pw/2+2*st, h=t1+t2+sh+1);
