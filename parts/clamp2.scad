@@ -1,7 +1,7 @@
 $fn=32;
 
 // i forgot the measurements, check out the other one
-od = 20;
+od = 15;
 sl = 42;
 sh = 18;
 so = 10;
@@ -11,13 +11,11 @@ hd = 3;
 
 difference() {
     hull() {
-            
-            
         for (y = [-sl/2,sl/2]) {
             for (x = [0, so]) {
                 translate([x,y,0]) sphere(d=od);
             }
-            for (z = [0,sh]) {
+            for (z = [0,sh-od/2+sw]) {
                 translate([0,y,z]) sphere(d=od);
             }
         }
@@ -31,9 +29,9 @@ difference() {
             }
         }
     }
-    hull() {
-        translate([0,-hd,hh]) rotate([90,90,90]) cylinder(d=hd, h=100, center=true);
-        translate([0,+hd,hh]) rotate([90,90,90]) cylinder(d=hd, h=100, center=true);
+    union() {
+        translate([0,-2*hd,hh]) rotate([90,90,90]) cylinder(d=hd, h=100, center=true);
+        translate([0,+2*hd,hh]) rotate([90,90,90]) cylinder(d=hd, h=100, center=true);
     }
 }
 
