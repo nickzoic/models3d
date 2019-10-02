@@ -1,9 +1,8 @@
 $fn=32;
 
-// i forgot the measurements, check out the other one
 od = 15;
 sl = 42;
-sh = 18;
+sh = 19;
 so = 10;
 sw = 2;
 hh = 10;

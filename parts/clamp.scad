@@ -19,9 +19,11 @@ difference() {
     }
     for (y=[-6,0,6]) {
         translate([0,y,hh]) rotate([90,90,90]) cylinder(d=hd, h=od, center=true);
+        /*
         for (x = [-5,-4,-3,-2,-1,1,2,3,4,5]) {
             translate([od*x/24,y,1]) cylinder(d=0.5,h=hh-hd/2-2);
         }
+        */
     }
 }
 

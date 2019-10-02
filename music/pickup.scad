@@ -1,8 +1,8 @@
 // pickup dimensions
 
-pl = 68; // length of pickup face
+pl = 69; // length of pickup face
 pw = 18;   // width of pickup face
-px = 78; // distance between mount screws
+px = 76; // distance between mount screws
 ph = 5;  // pickup height above plate.
 
 // pickup surround

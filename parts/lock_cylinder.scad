@@ -50,7 +50,7 @@ difference() {
         translate([0,0,-2]) linear_extrude(ll1+ll2+ll3) {
             pentagon(kr);
         }
-        union() {
+        #union() {
             cylinder(r=kr, h=ll1+ll2+ll3-kr);
             translate([0,0,ll1+ll2+ll3-kr]) cylinder(r1=kr,r2=0,h=kr);    
         }
@@ -60,11 +60,17 @@ difference() {
 }
 
 module key() {
-translate([13,14,3.425]) rotate([90,270,0]) linear_extrude(30) pentagon(kr-1);
-difference () {
-    translate([13,14,2.5]) cylinder(d=20, h=5, center=true);
-    translate([20,24,0]) cylinder(d=5, h=10, center=true);
-  }
+    intersection() {
+        hull() {
+            translate([13,12,3.425])sphere(d=kr*2-2);
+            translate([13,-12,3.425]) sphere(d=kr*2-2);
+        }
+        translate([13,16,3.425]) rotate([90,270,0]) linear_extrude(32) pentagon(kr-1);
+    }
+    difference() {
+        translate([13,16,2.5]) cylinder(d=20, h=5, center=true);
+        translate([13,21,2.5]) cylinder(d=5, h=10, center=true);
+    }
 }
 
 key();
