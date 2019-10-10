@@ -1,18 +1,23 @@
 /*
-printer settings:
+* printer settings:
 * layer: 0.15mm
 * walls: 1.5mm / 4 lines
 * top: 0.6mm / 4 layers (increase this if fill shows through?)
+  * set top layer angles to [0,60,120] because the usual
+    45/135 looks terrible on the top layer.   
 * bottom: 0mm / 0 layers
+  * or make it a single layer for adhesion purposes.
 * infill: 25% Gyroid
+  * up to 50%.  Or tri-hex, really anything
+    other than square grids should look nice.
 * support: none
-* adhesion: none (brim might have been a good idea?)
+* adhesion: none
 */
 
 // pickup dimensions
 
-pl = 68; // length of pickup face
-pw = 19;   // width of pickup face
+pl = 69; // length of pickup face
+pw = 18;   // width of pickup face
 px = 76.5; // distance between mount screws
 ph = 5;  // pickup height above plate.
 pr = pw/4;  // pickup corner radius (pw/2 for singles, pw/4 for humbuckers
@@ -21,12 +26,13 @@ pr = pw/4;  // pickup corner radius (pw/2 for singles, pw/4 for humbuckers
 // plate dimensions
 
 d1 = 95;  // outer diameter
-t1 = 0.75;     // thickness below bevel
-t2 = 1.75;     // thickness of 45deg bevel
+t1 = 2;     // thickness below bevel
+t2 = 2;     // thickness of 45deg bevel
 
 psh = 6.5;  // pickup screw head
 pss = 3.5;  // pickup screw shaft
 psc = 1.5;  // pickup screw countersink
+pso = 0.5;    // pickup screw offset 
 
 msd = 82.5;  // mount screw holes diameter
 msn = 6; // number of mount screws
@@ -37,16 +43,16 @@ msc = 1.5; // mount screw countersink
 pa = -30;  // pickup angle
 
 // pickup surround
-st = 2;   // pickup surround thickness
-sh = 2;   // pickup surround height
+st = 1;   // pickup surround thickness
+sh = 1.5;   // pickup surround height
            // set to ph+st for closed pickup cover
 sd = d1/2;  // circle in middle
 
 
 $fn = 100;
 
-nx = 45;  // width of neck
-ny = 40;  // offset of neck away from center
+nx = 49.5;  // width of neck
+ny = 39;  // offset of neck away from center
 
 
 difference() {
@@ -82,9 +88,9 @@ difference() {
         
         // pickup screws & countersinks 
         for (x = [-px/2,+px/2]) {
-            translate([x,0,t1+t2]) cylinder(d=psh,h=10);
-            translate([x,0,t1+t2-psc]) cylinder(d1=pss,d2=psh,h=psc);
-            translate([x,0,-1]) cylinder(d=pss,h=20);
+            translate([x,pso,t1+t2]) cylinder(d=psh,h=10);
+            translate([x,pso,t1+t2-psc]) cylinder(d1=pss,d2=psh,h=psc);
+            translate([x,pso,-1]) cylinder(d=pss,h=20);
         }
     }
    
