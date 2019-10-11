@@ -1,13 +1,31 @@
-$fn=40;
+/* added some info for Thingiverse Customizer */
 
-e = "BLN-1"; // engraving
-l = 51; // battery length
-w = 36.5; // battery width
-h = 16.0; // battery height
-n = 3; // number of batteries
-t = 3; // thickness of walls
-f = 23; // finger cutout size
-x = 3; // size of eject hole
+// Engraving on side
+e = "BLN-1";
+
+// Battery Length
+l = 51;
+
+// Battery Width
+w = 36.5;
+
+// Battery Height
+h = 16.0;
+
+// Number of Batteries
+n = 3;
+
+// Thickness of Walls
+t = 3;
+
+// Finger cutout size
+f = 23;
+
+// Size of eject hole (in case they get stuck)
+x = 3;
+
+/* [Hidden] */
+$fn=40;
 
 difference() {
     minkowski() {

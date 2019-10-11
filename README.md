@@ -2,6 +2,10 @@
 
 Messing about with 3D models, mostly in OpenSCAD.
 
+[Some of these are also on Thingiverse](https://www.thingiverse.com/nickzoic/designs)
+and I've added [Thingiverse Customizer Markup](https://customizer.makerbot.com/docs) 
+to a couple of them so you can modify them easily without OpenSCAD.
+
 * alpha/: text based stuff, keyrings and tchotchkes.
 
 * bikes/: bicycle / motorcycle / caravan parts
