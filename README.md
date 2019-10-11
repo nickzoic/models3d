@@ -1,6 +1,6 @@
 # models3d
 
-Messing about with 3D models, mostly in OpenSCAD.
+[Messing about with 3D models](https://nick.zoic.org/tag/3dprint/), mostly in OpenSCAD.
 
 [Some of these are also on Thingiverse](https://www.thingiverse.com/nickzoic/designs)
 and I've added [Thingiverse Customizer Markup](https://customizer.makerbot.com/docs) 
