@@ -3,14 +3,50 @@ $fn=64;
 
 difference() {
     union() {
-        cylinder(d=64,h=1);
-        translate([0,0,1]) cylinder(d1=64,d2=62, h=1);
-        translate([0,0,2]) cylinder(d1=52,d2=50,h=1);
-        translate([0,0,3]) cylinder(d1=40,d2=38,h=1);
+        cylinder(d=76,h=1);
+        translate([0,0,1]) cylinder(d1=76,d2=74,h=1);
+        translate([0,0,2]) cylinder(d1=64,d2=62, h=1);
+        translate([0,0,3]) cylinder(d1=52,d2=50,h=1);
     }
-    
-    translate([0,0,2.5]) difference() { 
-        translate([-125,-102,0]) import("orange.stl");
-        translate([0,10,0]) cylinder(d=18,h=10);
+    translate([0,0,2.5]) feet_cutouts();
+    translate([0,0,3]) cylinder(d1=38,d2=40,h=1);
+    translate([0,0,2]) cylinder(d1=26,d2=24,h=1);
+}
+
+
+module right_foot() {
+    intersection() { 
+        translate([-140,-102,0]) import("orange.stl");
+        translate([8,-3,0]) cylinder(d=40,h=100);
     }
 }
+
+module left_foot() {
+    intersection() { 
+        translate([-110,-102,0]) import("orange.stl");
+        translate([-8,-3,0]) cylinder(d=40,h=100);
+    }
+}
+
+
+
+scale = 1.05;
+
+module feet_cutouts() {
+    translate([19,-2.5,0]) rotate([0,0,0]) scale(scale) left_foot();
+    translate([-19.5,-1.75,0]) rotate([0,0,0]) scale(scale) right_foot();
+}
+
+/*
+// this is a guide for manually aligning the feet
+// 35mm apart at the heel tips
+// 24mm apart at inside toe tips
+#polygon(points=[
+    [-12,-12],
+    [+12,-12],
+    [+17.5, +12],
+    [-17.5, +12]
+]);
+
+feet_cutouts();
+*/
