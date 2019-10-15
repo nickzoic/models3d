@@ -9,9 +9,9 @@ difference() {
 module new_splash() {
     difference() {
         union() {
-            cylinder(d=85,h=1);
+            cylinder(d=70,h=1);
             translate([0,0,1]) rotate_extrude() {
-                wave(40,0.75,3.75,2.5);
+                wave(34,0.75,3.75,2.5);
             }
         }
     }
