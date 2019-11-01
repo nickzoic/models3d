@@ -16,5 +16,5 @@ module fnord(x) {
 }
 
 fnord(12);
-//cylinder(d1=50,d2=50,h=3);
-//translate([0,0,3]) cylinder(d1=50,d2=10,h=5);
+cylinder(d1=50,d2=50,h=3);
+translate([0,0,3]) cylinder(d1=50,d2=10,h=5);
