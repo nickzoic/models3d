@@ -1,10 +1,17 @@
+// Lock cylinder replacement for a caravan lock/latch set.
+//
+// Just a pentagonal socket really, it's not exactly secure, but since you can let
+// yourself into the van by peeling open some velcro and crawling in, that's not
+// really the point.
+// print with a very high density 3D infill (75% gyroid worked for me)
+
 od1 = 15.7;
 od2 = 12.5;
-od3 = 10.5;
+od3 = 9.0;
 ll1 = 3.76;
 ll2 = 1.5;
 ll3 = 9.79+2;
-ll4 = 1.35;
+ll4 = 1.5;
 ll5 = 2.37;
 ll6 = 5.4;
 
@@ -50,28 +57,11 @@ difference() {
         translate([0,0,-2]) linear_extrude(ll1+ll2+ll3) {
             pentagon(kr);
         }
-        #union() {
+        union() {
             cylinder(r=kr, h=ll1+ll2+ll3-kr);
             translate([0,0,ll1+ll2+ll3-kr]) cylinder(r1=kr,r2=0,h=kr);    
         }
     }
-    translate([0,0,-1]) cylinder(r=kr, h=3);
-    translate([0,0,2]) cylinder(r1=kr, r2=1, h=3);
+    translate([0,0,-1]) cylinder(r=kr, h=8);
+    translate([0,0,7]) cylinder(r1=kr, r2=1, h=3);
 }
-
-module key() {
-    intersection() {
-        hull() {
-            translate([13,12,3.425])sphere(d=kr*2-2);
-            translate([13,-12,3.425]) sphere(d=kr*2-2);
-        }
-        translate([13,16,3.425]) rotate([90,270,0]) linear_extrude(32) pentagon(kr-1);
-    }
-    difference() {
-        translate([13,16,2.5]) cylinder(d=20, h=5, center=true);
-        translate([13,21,2.5]) cylinder(d=5, h=10, center=true);
-    }
-}
-
-key();
-rotate([0,0,180]) key();
