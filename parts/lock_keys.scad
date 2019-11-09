@@ -7,7 +7,7 @@
 
 kr = 5.125;
 
-$fn=200;
+$fn=12;
 
 module regular_polygon(sides, radius)
 {
@@ -30,17 +30,22 @@ module pentagon(radius)
 module key() {
     intersection() {
         hull() {
-            translate([0,12,3.425])sphere(d=kr*2);
-            translate([0,-12,3.425]) sphere(d=kr*2);
+            translate([0,12,0]) sphere(d=kr*2);
+            translate([0,-12,0]) sphere(d=kr*2);
         }
-        translate([0,16,3.425]) rotate([90,270,0]) linear_extrude(32) pentagon(kr);
+        translate([0,16,0]) rotate([90,270,0]) linear_extrude(32) pentagon(kr);
     }
-    difference() {
-        translate([0,16,2.5]) cylinder(d=20, h=5, center=true);
-        translate([0,21,2.5]) cylinder(d=5, h=10, center=true);
+    minkowski() {
+        rotate([0,270,0]) difference () {
+            translate([4.9,20.5,-1.5]) linear_extrude(3) pentagon(10);
+            translate([4.9,20.5,-1.5]) linear_extrude(5) pentagon(7);
+            
+            //translate([0,21,0]) cylinder(d=6, h=10, center=true);
+        }
+        sphere(r=1);
     }
 }
 
-key();
-translate([16,10,0]) rotate([0,0,180]) key();
-translate([-16,10,0]) rotate([0,0,180]) key();
+for (x = [0:10:40]) {
+    translate([x,0,0]) key();
+}
