@@ -35,7 +35,7 @@ difference() {
         for (a = [45:90:360]) {
             rotate([0,0,a]) translate([hole_circle_radius,0,0]) cylinder(d=hole_size, h=mount_thick+flange_thick+2);
         }
-        translate([0,0,mount_thick+flange_thick]) cube([face_size, face_size, 3], center=true);
+        //translate([0,0,mount_thick+flange_thick]) cube([face_size, face_size, 3], center=true);
     }
     for (n = [0:mount_screw_holes-1]) {
         rotate([0,0,n*360/mount_screw_holes]) {
