@@ -1,16 +1,18 @@
+// a giant gear suitable for screwing to wood and a little pinion to turn it with.
+
 include <./gears.scad>;
 
-hh = 10;    // z-height
-nt = 100;  // number of teeth
+hh = 8;    // z-height
+nt = 9*13;  // number of teeth
 id = 305;  // inner diameter
-td = id * 1.11;  // tooth diameter
+td = id * 1.1;  // tooth diameter
 gm = td / nt; // gear module (tooth pitch)
-ns = 10; // number of segments
-np = ns / 2;  // number to actually print
-hd = 5;  // screw hole diameter
-
+ns = 9; // number of segments
+np = 3;  // number to actually print
+hd = 4;  // screw hole diameter
+nw = 5; // number of screws
 for (n = [0:np-1]) {
-    translate([26*n-id/2,0,0]) {
+    translate([24*n-id/2,0,0]) {
         difference() {
             intersection() {
                 rotate([0,0,180/nt]) spur_gear(gm,nt,hh,id);
@@ -18,14 +20,14 @@ for (n = [0:np-1]) {
                     [id/2,0], [id/2,hh], [1.1*td/2,hh], [1.1*td/2,0]
                 ]);
             }
-            for (a = [3, 180/ns, 360/ns-3]) {
-                rotate([0,0,a]) {
-                    translate([id*1.04/2, 0, hh-2]) cylinder(d1=hd,d2=hd+4,h=2); 
-                    translate([id*1.04/2, 0, -1]) cylinder(d=hd,h=hh+2);
+            for (s = [1:nw]) {
+                rotate([0,0,(s-0.5)*360/ns/nw]) {
+                    translate([id*1.035/2, 0, hh-2]) cylinder(d1=hd,d2=hd+4,h=2); 
+                    translate([id*1.035/2, 0, -1]) cylinder(d=hd,h=hh+2);
                 }
             }
         }
     }
 }
 
-translate([-25,20,0]) spur_gear(gm, 8, hh, 8);
+translate([-17,20,0]) spur_gear(gm, 8, 12, 6);
