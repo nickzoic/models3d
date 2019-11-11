@@ -15,7 +15,10 @@ for (n = [0:np-1]) {
     translate([24*n-id/2,0,0]) {
         difference() {
             intersection() {
-                rotate([0,0,180/nt]) spur_gear(gm,nt,hh,id);
+                union() {
+                    rotate([0,0,180/nt]) spur_gear(gm,nt,hh,id);
+                    cylinder(d=td*0.975,h=hh); // hide rounding errors in gear library
+                }
                 rotate_extrude(angle=360/ns) polygon(points=[
                     [id/2,0], [id/2,hh], [1.1*td/2,hh], [1.1*td/2,0]
                 ]);
