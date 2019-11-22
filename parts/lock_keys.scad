@@ -46,6 +46,6 @@ module key() {
     }
 }
 
-for (x = [0:10:40]) {
+for (x = [0:10:20]) {
     translate([x,0,0]) key();
 }
