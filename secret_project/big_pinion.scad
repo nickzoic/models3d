@@ -2,7 +2,7 @@
 // with another bearing to keep the shaft aligned.
 // check dimensions!
 
-bearing_id = 12;
+bearing_id = 15;
 total_height = 27;
 shaft_diameter = 6.35;
 shaft_length = 18;
@@ -14,8 +14,8 @@ gear_teeth = 7;
 
 // ball bearing in bottom
 ball_size = 8;
-include <./gears.scad>;
 
+include <./gears.scad>;
 
 difference() {
     union() {
