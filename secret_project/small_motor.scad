@@ -34,14 +34,17 @@ pilot_depth = 2;
 mount_diameter = 50.2;
 mount_thick = 15;
 flange_diameter = 70;
-flange_thick = 8;
+flange_thick = 4;
 mount_screw_holes = 5;
 mount_screw_size = 5;
+mount_screw_length = 20;
 
 // bearing
 bearing_thick = 6;
 bearing_od = 24;
 bearing_id = 12;
+
+wall_thick = 3.5;
 
 eccentric = (mount_diameter - bearing_od) / 2 - 3;
 
@@ -49,24 +52,31 @@ $fn=64;
 
 difference() {
     union() {
-        cylinder(d1 = mount_diameter-2, d2=mount_diameter, h=1);
-        translate([0,0,1]) cylinder(d = mount_diameter, h = mount_thick-1);
-        translate([0,0,mount_thick]) cylinder(d = flange_diameter, h=flange_thick);
+        cylinder(d = flange_diameter, h=flange_thick);
+        cylinder(d = mount_diameter, h=flange_thick+mount_thick-1);
+        translate([0,0,flange_thick+mount_thick-1]) cylinder(d1=mount_diameter,d2=mount_diameter-2,h=1);   
+    }
+    difference() {
+        translate([0,0,wall_thick]) cylinder(d = mount_diameter - wall_thick*2,h=100);
+        translate([eccentric,0,0]) cylinder(d = bearing_od+wall_thick*2,h=100);
+        translate([eccentric-motor_shaft_offset,motor_ear_width/2,0]) cylinder(d=motor_ear_screw+wall_thick*2,h=100);
+        translate([eccentric-motor_shaft_offset,-motor_ear_width/2,0]) cylinder(d=motor_ear_screw+wall_thick*2,h=100);
+        cube([100,wall_thick,100],center=true);    
     }
     translate([eccentric,0,0]) {
-        cylinder(d = bearing_od-3, h = bearing_thick+1);
-        cylinder(d = bearing_od, h = bearing_thick);
-        cylinder(d = bearing_id+2, h=mount_thick+flange_thick-pilot_depth);
-        cylinder(d = pilot_diameter, h=100);
-        cylinder(d1 = bearing_od+2, d2=bearing_od, h=1);
+        cylinder(d = pilot_diameter, h=pilot_depth+1);
+        translate([0,0,pilot_depth]) cylinder(d=bearing_id+2,h=100);
+        translate([0,0,flange_thick+mount_thick-bearing_thick-1]) cylinder(d=bearing_od-2,h=bearing_thick);
+        translate([0,0,flange_thick+mount_thick-bearing_thick]) cylinder(d=bearing_od,h=bearing_thick);
+        translate([0,0,flange_thick+mount_thick-1]) cylinder(d1=bearing_od,d2=bearing_od+2,h=1);
     }
     translate([eccentric-motor_shaft_offset,motor_ear_width/2,0]) cylinder(d=motor_ear_screw,h=100);
     translate([eccentric-motor_shaft_offset,-motor_ear_width/2,0]) cylinder(d=motor_ear_screw,h=100);
     
     for (n = [0:mount_screw_holes-1]) {
         rotate([0,0,n*360/mount_screw_holes]) {
-            translate([flange_diameter/2-mount_screw_size,0,0]) cylinder(d=mount_screw_size, h=mount_thick+flange_thick+2);
+            translate([flange_diameter/2-mount_screw_size,0,-1]) cylinder(d=mount_screw_size, h=flange_thick+2);
         }
     }
-    translate([-(flange_diameter/2),0,0]) rotate([0,0,45]) cube([10,10,100],center=true);
+    translate([-(flange_diameter/2),0,0]) rotate([0,0,45]) cube([10,10,100],center=true);    
 }
