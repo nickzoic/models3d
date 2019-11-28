@@ -8,10 +8,10 @@
 // then the eccentric lets you adjust this by a few mm
 // ~177 mm.
 
-// bearing is some NSK 6202V which was in the junkbox.
-// a much cheaper bearing would do the trick just fine.
-
+// bearing is a cheap 6901Z
 // motor is a 28BYJ-48
+
+version = "v3";
 
 face_size = 2.3 * 25.4 + 1;  // with an allowance to fit
 hole_circle_radius = 2.625 * 25.4 / 2;
@@ -21,7 +21,7 @@ hole_sink_dep = 4;
 
 motor_diameter = 28;
 motor_ear_width = 34.5;
-motor_ear_screw = 3;
+motor_ear_screw = 3.5;
 motor_shaft_offset = 7.5;
 motor_wire_width = 15;
 shaft_diameter = 5;
@@ -80,4 +80,7 @@ difference() {
         }
     }
     translate([-(flange_diameter/2),0,0]) rotate([0,0,45]) cube([10,10,100],center=true);    
+    
+    translate([-10,-10,wall_thick-1]) linear_extrude(2) text("n",halign="center", valign="center");
+    translate([-10,10,wall_thick-1]) linear_extrude(2) text(version,halign="center", valign="center");
 }
