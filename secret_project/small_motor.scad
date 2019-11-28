@@ -27,11 +27,11 @@ motor_wire_width = 15;
 shaft_diameter = 5;
 shaft_length = 6;
 shaft_flat = 3;
-pilot_diameter = 9;
+pilot_diameter = 9.6;
 pilot_depth = 2;
 
 // mounting hole
-mount_diameter = 50.2;
+mount_diameter = 51;
 mount_thick = 15;
 flange_diameter = 70;
 flange_thick = 4;
@@ -41,10 +41,10 @@ mount_screw_length = 20;
 
 // bearing
 bearing_thick = 6;
-bearing_od = 24;
+bearing_od = 24.5;
 bearing_id = 12;
 
-wall_thick = 3.5;
+wall_thick = 1.6;
 
 eccentric = (mount_diameter - bearing_od) / 2 - 3;
 
@@ -61,13 +61,14 @@ difference() {
         translate([eccentric,0,0]) cylinder(d = bearing_od+wall_thick*2,h=100);
         translate([eccentric-motor_shaft_offset,motor_ear_width/2,0]) cylinder(d=motor_ear_screw+wall_thick*2,h=100);
         translate([eccentric-motor_shaft_offset,-motor_ear_width/2,0]) cylinder(d=motor_ear_screw+wall_thick*2,h=100);
+        translate([eccentric-motor_shaft_offset,0,0]) cube([wall_thick,100,100], center=true);
         cube([100,wall_thick,100],center=true);    
     }
     translate([eccentric,0,0]) {
         cylinder(d = pilot_diameter, h=pilot_depth+1);
         translate([0,0,pilot_depth]) cylinder(d=bearing_id+2,h=100);
-        translate([0,0,flange_thick+mount_thick-bearing_thick-1]) cylinder(d=bearing_od-2,h=bearing_thick);
-        translate([0,0,flange_thick+mount_thick-bearing_thick]) cylinder(d=bearing_od,h=bearing_thick);
+        translate([0,0,wall_thick]) cylinder(d=bearing_od-2,h=100);
+        translate([0,0,flange_thick+mount_thick-bearing_thick]) cylinder(d=bearing_od,h=100);
         translate([0,0,flange_thick+mount_thick-1]) cylinder(d1=bearing_od,d2=bearing_od+2,h=1);
     }
     translate([eccentric-motor_shaft_offset,motor_ear_width/2,0]) cylinder(d=motor_ear_screw,h=100);
