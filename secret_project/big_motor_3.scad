@@ -8,7 +8,7 @@
 // then the eccentric lets you adjust this by a few mm
 // ~177 mm.
 
-version = "v5";
+version = "v6";
 
 // motor is a NEMA 23 stepper also from the junkbox.
 // I think it's been in the junkbox for almost 30 years.
@@ -21,8 +21,8 @@ motor_hole_size = 5.5;
 motor_hole_sink_dia = 9;
 motor_hole_sink_dep = 4;
 
-motor_shaft_diameter = 6.35;
-motor_shaft_length = 15;
+motor_shaft_diameter = 6.35 - 0.1;  // fiddled slightly to fit.
+motor_shaft_length = 19;
 motor_pilot_diameter = 38.75;
 motor_pilot_depth = 1.5;
 
@@ -68,6 +68,11 @@ primary_offset = primary_modulus*(primary_input_teeth+primary_output_teeth)/2;
 primary_height = 10;
 primary_clear = 1;
 
+// top cover
+cover_thick = 1.2;
+cover_motor_thick=8;
+cover_height = motor_shaft_length+motor_pilot_depth+2+flange_thick;
+
 include <./gears.scad>
 $fn=64;
 
@@ -76,21 +81,23 @@ $fn=64;
 // axis at [primary_offset,0] is motor shaft
 // axis at [-eccentric,0] is base mount
 
-show_base_piece = 1;
+show_base_piece = 0;
 if (show_base_piece) {
     difference() {
         union() {
             hull() {    
-                cylinder(d = flange_diameter-wall_thick*2, h=flange_thick);
-                //translate([primary_offset,0,0]) cylinder(d=motor_mount_diameter, h=flange_thick);
-                translate([primary_offset+motor_hole_circle_offset,-motor_hole_circle_offset,0]) cylinder(d=motor_hole_sink_dia,h=flange_thick);
-                translate([primary_offset+motor_hole_circle_offset,+motor_hole_circle_offset,0]) cylinder(d=motor_hole_sink_dia,h=flange_thick);
+                cylinder(d = flange_diameter-wall_thick*2-0.5, h=flange_thick);
+                translate([primary_offset+motor_hole_circle_offset,-motor_hole_circle_offset,0]) cylinder(d=motor_hole_sink_dia-0.5,h=flange_thick);
+                translate([primary_offset+motor_hole_circle_offset,+motor_hole_circle_offset,0]) cylinder(d=motor_hole_sink_dia-0.5,h=flange_thick);
             }
             translate([-eccentric,0,0]) {
                 cylinder(d = mount_diameter, h=flange_thick+mount_thick-1);
                 translate([0,0,flange_thick+mount_thick-1]) cylinder(d1=mount_diameter,d2=mount_diameter-2,h=1);
             }   
         }
+        translate([primary_offset-motor_hole_circle_offset+15,motor_hole_circle_offset+motor_hole_sink_dia,0]) cylinder(d=5,h=primary_height+flange_thick+2);
+        translate([primary_offset-motor_hole_circle_offset+15,-motor_hole_circle_offset-motor_hole_sink_dia,0]) cylinder(d=5,h=primary_height+flange_thick+2);
+
         difference() {
             translate([-eccentric,0,wall_thick]) cylinder(d = mount_diameter - wall_thick*2,h=100);
             cylinder(d = bearing_od+wall_thick*2,h=100);
@@ -108,37 +115,42 @@ if (show_base_piece) {
 
 show_cover_piece = 1;
 if (show_cover_piece) {
-    translate([0,0,-flange_thick-primary_height]) {
+    translate([0,0,-cover_height+flange_thick]) {
         difference() {
             hull() {    
-                cylinder(d = flange_diameter, h=flange_thick*2+primary_height);
-                //translate([primary_offset,0,0]) cylinder(d=motor_mount_diameter, h=flange_thick+primary_height);
-                translate([primary_offset+motor_hole_circle_offset,-motor_hole_circle_offset,0]) cylinder(d=motor_hole_sink_dia+wall_thick*2,h=flange_thick*2+primary_height);
-                translate([primary_offset+motor_hole_circle_offset,+motor_hole_circle_offset,0]) cylinder(d=motor_hole_sink_dia+wall_thick*2,h=flange_thick*2+primary_height);
+                cylinder(d = flange_diameter, h=cover_height);
+                translate([primary_offset+motor_hole_circle_offset,-motor_hole_circle_offset,0]) cylinder(d=motor_hole_sink_dia+wall_thick*2,h=cover_height);
+                translate([primary_offset+motor_hole_circle_offset,+motor_hole_circle_offset,0]) cylinder(d=motor_hole_sink_dia+wall_thick*2,h=cover_height);
             }
-            translate([0,0,flange_thick]) hull() {    
-                cylinder(d = flange_diameter - wall_thick*2, h=primary_height+flange_thick);
-                //translate([primary_offset,0,0]) cylinder(d=motor_mount_diameter - wall_thick*2, h=primary_height);
-                translate([primary_offset+motor_hole_circle_offset,-motor_hole_circle_offset,0]) cylinder(d=motor_hole_sink_dia,h=primary_height+flange_thick);
-                translate([primary_offset+motor_hole_circle_offset,+motor_hole_circle_offset,0]) cylinder(d=motor_hole_sink_dia,h=primary_height+flange_thick);
-      
+            difference() {
+                translate([0,0,cover_thick]) hull() {    
+                    cylinder(d = flange_diameter - wall_thick*2, h=cover_height);
+                    translate([primary_offset+motor_hole_circle_offset,-motor_hole_circle_offset,0]) cylinder(d=motor_hole_sink_dia,h=cover_height);
+                    translate([primary_offset+motor_hole_circle_offset,+motor_hole_circle_offset,0]) cylinder(d=motor_hole_sink_dia,h=cover_height);
+                }
+                translate([75+primary_offset-motor_hole_circle_offset-motor_hole_sink_dia,0,cover_motor_thick/2]) cube([150,150,cover_motor_thick],center=true);
+                translate([primary_offset-motor_hole_circle_offset+15,motor_hole_circle_offset+motor_hole_sink_dia,0]) cylinder(d=12,h=cover_height-flange_thick);
+                translate([primary_offset-motor_hole_circle_offset+15,-motor_hole_circle_offset-motor_hole_sink_dia,0]) cylinder(d=12,h=cover_height-flange_thick);
+                    
             }
+            translate([primary_offset-motor_hole_circle_offset+15,motor_hole_circle_offset+motor_hole_sink_dia,0]) cylinder(d=5,h=cover_height);
+                translate([primary_offset-motor_hole_circle_offset+15,-motor_hole_circle_offset-motor_hole_sink_dia,0]) cylinder(d=5,h=cover_height);
             translate([primary_offset,0,0]) {
                 for (a = [45:90:360]) {
                     rotate([0,0,a]) translate([motor_hole_circle_radius,0,0]) {
                         cylinder(d=motor_hole_size, h=flange_thick);
-                        translate([0,0,flange_thick-motor_hole_sink_dep]) cylinder(d=motor_hole_sink_dia, h=100);
+                        translate([0,0,cover_motor_thick-motor_hole_sink_dep]) cylinder(d=motor_hole_sink_dia, h=100);
                     }
                 }
                 cylinder(d=motor_pilot_diameter, h=motor_pilot_depth);
-                cylinder(d=motor_pilot_diameter-4, h=flange_thick);
+                cylinder(d=motor_pilot_diameter-4, h=cover_height);
             }
-            translate([0,0,flange_thick-1]) linear_extrude(1) text(version,halign="center", valign="center");
+            translate([primary_offset,motor_pilot_diameter/2+1,cover_motor_thick-1]) linear_extrude(1) text(version,halign="", valign="bottom");
         }
     }
 }
 
-show_primary_output_gear=1;
+show_primary_output_gear=0;
 if (show_primary_output_gear) {
     translate([0,0,-primary_height+primary_clear]) {
         difference() {
@@ -156,15 +168,19 @@ if (show_primary_output_gear) {
 
 show_primary_input_gear=1;
 if (show_primary_input_gear) {
-    translate([primary_offset,0,-primary_height+primary_clear]) {
+    translate([primary_offset,0,-cover_height+flange_thick+motor_pilot_depth]) {
        difference() {
-           spur_gear(primary_modulus,primary_input_teeth,primary_height - 2 *primary_clear);
-           cylinder(d=motor_shaft_diameter,h=primary_height);
+           union() {
+               translate([0,0,1]) spur_gear(primary_modulus, primary_input_teeth, motor_shaft_length-1);
+               cylinder(h=motor_shaft_length, d=motor_shaft_diameter+3);
+           } 
+           cylinder(d=motor_shaft_diameter,motor_shaft_length-1);
+           cylinder(d=2,motor_shaft_length);
        }
    }
 }
 
-show_output_shaft=1;
+show_output_shaft=0;
 if (show_output_shaft) {
     difference() {
         union() {
