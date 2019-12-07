@@ -1,3 +1,9 @@
+// socket_tube.scad ... a tube which lets you mount a 1/4" / 6.35mm phono socket 
+// onto a flat surface using four wood screws (and a small hole for the wires)
+
+// this is a test: trying to work out why thingiverse doesn't show this file in
+// the usual preview mode.
+
 socket_width = 18;
 socket_depth = 30;
 thread_diameter = 13;
