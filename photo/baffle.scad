@@ -8,7 +8,7 @@ bv = 1;    // bevel size
 
 d3 = 34;   // should be lens exit size
 
-h3 = 1;   // angled bit height
+h3 = 10;   // angled bit height
 
 cx = 10;   // sensor cutout.
 cy = 7.5;
@@ -37,7 +37,7 @@ difference() {
         translate([+cx,+cy,h3]) cylinder(r=cr, h=h1+h2-h3);
         translate([0,0,h1+h2]) cylinder(d=d1-4*bv);
     }
-    translate([0,d2/2-bv*2,h2-0.5]) linear_extrude() text("v2",halign="center",valign="top",size=3);
+    translate([0,d2/2-bv*2,h2-0.5]) linear_extrude() text("v1.2",halign="center",valign="top",size=3);
     translate([0,-(d2/2-bv*2),h2-0.5]) linear_extrude() text("NM",halign="center",valign="bottom",size=3);
     
     translate([21,0,0]) cylinder(d=3,h=3);
