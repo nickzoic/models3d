@@ -1,17 +1,17 @@
-d1 = 36.5; // smaller diameter
+d1 = 37; // smaller diameter
 d2 = 48.0; // larger diameter
 
 h1 = 7;    // smaller height
-h2 = 14;   // larger height
+h2 = 15;   // larger height
 
 bv = 1;    // bevel size
 
-d3 = 34;   // should be lens exit size
+d3 = 33;   // should be lens exit size
 
-h3 = 10;   // angled bit height
+h3 = 20;   // angled bit height
 
-cx = 10;   // sensor cutout.
-cy = 7.5;
+cx = 9;   // sensor cutout.
+cy = 6.5;
 cr = 2;
 
 $fn = 100;
@@ -37,24 +37,36 @@ difference() {
         translate([+cx,+cy,h3]) cylinder(r=cr, h=h1+h2-h3);
         translate([0,0,h1+h2]) cylinder(d=d1-4*bv);
     }
-    translate([0,d2/2-bv*2,h2-0.5]) linear_extrude() text("v1.2",halign="center",valign="top",size=3);
-    translate([0,-(d2/2-bv*2),h2-0.5]) linear_extrude() text("NM",halign="center",valign="bottom",size=3);
+    translate([0,d2/2-bv*2,h2-0.5]) linear_extrude() text("v1.3",halign="center",valign="top",size=3);
+    rotate([0,0,-20]) translate([0,-(d2/2-bv*2),h2-0.5]) linear_extrude() text("nick",halign="center",valign="bottom",size=3);
+    rotate([0,0,20]) translate([0,-(d2/2-bv*2),h2-0.5]) linear_extrude() text("zoic",halign="center",valign="bottom",size=3);
     
-    translate([21,0,0]) cylinder(d=3,h=3);
+    
+    translate([21,0,4]) cylinder(d1=3,d2=1,h=2);
+    translate([21,0,0]) cylinder(d=3,h=4);
+    translate([21,0,0]) cylinder(d1=4,d2=3,h=1);
+    
     
     /*difference() {
         rotate([0,0,225]) cube([50,50,7]);
         cylinder(d=37,h=7);
     }*/
     
-    translate([0,-23,0]) cube([20,10,14],center=true);
+    translate([0,-24,0]) cube([4,10,40],center=true);
     
     intersection() {
         difference() {
-            cylinder(d=46,h=2);
-            cylinder(d=37,h=2);
+            cylinder(d=50,h=6);
+            cylinder(d1=38,d2=41,h=6);
         }
-        rotate([0,0,165]) cube([50,50,2]);
+        rotate([0,0,230]) cube([50,50,6]);
+    }
+    intersection() {
+        difference() {
+            cylinder(d1=45,d2=42,h=5);
+            cylinder(d1=38,d2=41,h=5);
+        }
+        rotate([0,0,135]) cube([50,50,5]);
     }
     
 }
