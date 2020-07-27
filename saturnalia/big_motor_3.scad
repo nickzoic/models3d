@@ -82,7 +82,7 @@ $fn=64;
 // axis at [primary_offset,0] is motor shaft
 // axis at [-eccentric,0] is base mount
 
-show_base_piece = 0;
+show_base_piece = 1;
 if (show_base_piece) {
     difference() {
         union() {
@@ -181,9 +181,9 @@ if (show_primary_output_gear) {
     }
 }
 
-show_primary_input_gear=0;
+show_primary_input_gear=1;
 if (show_primary_input_gear) {
-    translate([primary_offset,0,-cover_height+flange_thick+motor_pilot_depth]) {
+    translate([primary_offset,0,-cover_height+cover_motor_thick+motor_pilot_depth]) {
        difference() {
            union() {
                translate([0,0,1]) spur_gear(primary_modulus, primary_input_teeth, motor_shaft_length-1);
@@ -196,7 +196,7 @@ if (show_primary_input_gear) {
    }
 }
 
-show_output_shaft=0;
+show_output_shaft=1;
 if (show_output_shaft) {
     difference() {
         union() {

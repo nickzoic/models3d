@@ -48,9 +48,10 @@ difference() {
         translate([0,0,ll1+ll2+ll3]) cylinder(d=od3, h=ll4);
         translate([0,0,ll1+ll2+ll3+ll4]) cylinder(d=od2, h=ll5);
         translate([0,0,ll1+ll2+ll3+ll4+ll5])
-            intersection() {
+            difference() {
                 cylinder(d=cw1, h=ll6);
-                cube([cw1,cw2,ll6*2], center=true);
+                translate([-3.6,-3.6,ll6/2]) cube([4,4,ll6+2],center=true);
+                translate([+3.6,+3.6,ll6/2]) cube([4,4,ll6+2],center=true);
             }
     }
     intersection() {
