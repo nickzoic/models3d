@@ -1,6 +1,7 @@
-m = 200;
-r = 60;
+r = 30;
+m = r*3;
 k = 63;  /* near enough */
+f = 5;
 
 faces = [
     [0,0,0],
@@ -22,16 +23,16 @@ font = "Comic Sans MS:style=Regular";
 text = [
     ["what made", "you laugh", "today?"],
     ["what did", "you learn", "today?"],
-    ["three", "three", "three"],
-    ["four","4","44","444"],
-    ["5 5", "5 5 5", "5 5 5 5 5", "5 5 5 5", "5"],
-    ["6"],
-    ["7"],
-    ["8"],
-    ["9"],
-    ["10"],
-    ["11"],
-    ["12"],
+    ["how were", "you kind", "today?"],
+    ["what did", "you work", "hard at", "today?"],
+    ["what",  "was the",  "best part", "of your", "day?"],
+    ["when were", "you brave", "today?" ], 
+    ["how did", "someone", "help you", "today?"],
+    ["who did", "you help", "today?"],
+    ["what", "would make", "tomorrow", "great?"],
+    ["what did", "you read", "about", "today?"],
+    ["what made", "you feel", "proud?"],
+    ["how were", "you helpful", "today?"],
 ];
 
 intersection_for(n = [0:11]) {
@@ -41,8 +42,8 @@ intersection_for(n = [0:11]) {
                 cube([m,m,m], center=true);
                 rotate([0,0,90]) {
                     for (t = [0:len(text[n])]) {
-                        y = (t - (len(text[n])/2) + 0.7) * -14;
-                        translate([0,y,m/2]) linear_extrude(2, center=true) text(text[n][t], size=10, font=font, halign="center", valign="center");
+                        y = (t - (len(text[n])/2) + 0.5) * -(f*1.4);
+                        translate([0,y,m/2]) linear_extrude(bg, center=true) text(text[n][t], size=f, font=font, halign="center", valign="center");
                     }
                 }
             }

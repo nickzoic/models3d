@@ -98,10 +98,51 @@ present("Molly", 50, 85, -3, 0);
 present("Liam", 65.5, 10, -2, 1);
 present("Marcus", 55, 119, -4, 0);
 rotate([0,0,90]) {
-    
     present("Mrs. Pearson", 25.5, -99, -3, 0);
     present("Ryder", 30, -67, -3, 1);
-}
+}}
+
+module keyrings6() {
+    present("Caitlin", 5, 10, -4, 0);
+    present("Christina", 5, 32.5, -4, 0);
+    present("Aaron", 4, 54.5, -3, 1);
+    present("Logan", 7, 74.5, -4, 2);
+    present("Jackson", 56, 53.5, -4, 0);
+    present("Alanah", 60, 9, -3, 1);
+    present("Chelsea", 60, 76.5, -4, 0);
+    present("Tyler", 77, 29.5, -4, 0);
+    present("Emily", 5, 97, -4, 0);
+    present("Spencer", 12, 119.5, -4, 0);
+    present("Daniel", 56, 99, -4, 0);
+    present("Finn", 72, 120, -4, 0);
 }
 
-keyrings5();
+module keyrings7() {
+    present("Finn", 5, 10, -4, 0);
+    present("Riley", 5, 33, -4, 0);
+    present("Sienna", 50, 10, -4, 0);
+    present("Angus", 51, 32, -4, 0);
+    present("Jayda", 5, 59, -3, 1);
+    present("Mr. Moroni", 5, 83, -3, 1);
+    present("Miss M", 55, 56, -4, 0);
+    present("Mr. Kapakoulakis", 5, 108, -4, 0);
+}
+
+module keyrings8() {
+    rotate([0,0,90]) present("Mr. Kapakoulakis", 5, -5, -4, 0);
+    present("Charlotte", 23, 10, -4, 0);
+    present("Amelia", 24, 34, -4, 0);
+    present("Betty", 28, 58, -4, 0);
+    present("April", 24, 84, -4, 0);
+    present("Felix", 24, 110, -4, 0);
+}
+
+    
+intersection() {
+    keyrings8();
+    //cube([120,135,10]);
+}
+//present("Sienna", 5, 10, -3, 1);
+
+
+//keyrings5();
