@@ -51,7 +51,41 @@ def mesh_to_pairs(mesh):
 
 dim = 5
 
+ball = 10
+
+print("""
+// http://forum.openscad.org/Rods-between-3D-points-tp13104p13115.html
+module rod(p1,p2,d){ // draw ray between 2 specified points
+  translate((p1+p2)/2)
+    rotate([-acos((p2[2]-p1[2]) / norm(p1-p2)),0,
+            -atan2(p2[0]-p1[0],p2[1]-p1[1])])
+       cylinder(d=d, h=norm(p1-p2), center = true);
+}
+$fn=16;
+difference() { union() {
+""")
+
 mesh = make_mesh(dim,dim,dim)
+
+def find_xyz(n):
+   return (n // (dim * dim)) * 10, ((n // dim) % dim) * 10, (n % dim) * 10 
+
+for k1 in mesh.keys():
+    x1,y1,z1 = find_xyz(k1)
+    print("        translate([%d,%d,%d]) sphere(d=%f); // %d" % (x1,y1,z1,ball+3,k1))
+
+for k1, k2 in mesh_to_pairs(mesh):
+    x1,y1,z1 = find_xyz(k1)
+    x2,y2,z2 = find_xyz(k2)
+    print("rod([%d,%d,%d],[%d,%d,%d],%f); // %d -- %d" % (x1,y1,z1,x2,y2,z2,ball+3,k1,k2))
+
+print("}")
+
+#for k1, k2 in mesh_to_pairs(mesh):
+#    x1,y1,z1 = find_xyz(k1)
+#   x2,y2,z2 = find_xyz(k2)
+#    print("rod([%d,%d,%d],[%d,%d,%d],%f); // %d -- %d" % (x1,y1,z1,x2,y2,z2,ball-1,k1,k2))
+
 count = 1000
 while count:
     new = perturb_mesh(mesh)
@@ -61,40 +95,9 @@ while count:
     else:
         count -= 1
 
-def find_xyz(n):
-   return (n // (dim * dim)) * 10, ((n // dim) % dim) * 10, (n % dim) * 10 
-
-#print("""
-#// http://forum.openscad.org/Rods-between-3D-points-tp13104p13115.html
-#module rod(p1,p2,r){ // draw ray between 2 specified points
-#  translate((p1+p2)/2)
-#    rotate([-acos((p2[2]-p1[2]) / norm(p1-p2)),0,
-#            -atan2(p2[0]-p1[0],p2[1]-p1[1])])
-#       cylinder(r=r, h=norm(p1-p2), center = true);
-#}
-#$fn=16;
-#""")
-
-#print("""
-#difference() {
-#    translate([-7,-7,-7]) cube([%d,%d,%d]);
-#""" % (dim*10+4, dim*10+4, dim*10+4))
-
-print("""
-difference() {
-    hull() {
-""")
-
-for k1 in mesh.keys():
-    x1,y1,z1 = find_xyz(k1)
-    print("        translate([%d,%d,%d]) sphere(r=6); // %d" % (x1,y1,z1,k1))
-
-print("    }")
-
 for k1, k2 in mesh_to_pairs(mesh):
     x1,y1,z1 = find_xyz(k1)
     x2,y2,z2 = find_xyz(k2)
-    #print("rod([%d,%d,%d],[%d,%d,%d],4.5); // %d -- %d" % (x1,y1,z1,x2,y2,z2,k1,k2))
-    print("    hull() { translate([%d,%d,%d]) sphere(r=4.5); translate([%d,%d,%d]) sphere(r=4.5); } // %d -- %d" % (x1,y1,z1,x2,y2,z2,k1,k2))
+    print("rod([%d,%d,%d],[%d,%d,%d],%f); // %d -- %d" % (x1,y1,z1,x2,y2,z2,ball+1,k1,k2))
 
 print("}")

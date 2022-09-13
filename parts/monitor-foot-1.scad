@@ -1,5 +1,5 @@
 $fn=200;
-height = 60;
+height = 100;
 
 difference() {
     //cylinder(d=50,h=height);

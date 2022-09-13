@@ -1,5 +1,5 @@
 w = 72;
-l = 70;
+l = 55;
 x = 15;
 
 $fn=40;
@@ -15,6 +15,8 @@ difference() {
     translate([x/2-w/2,0,0]) cylinder(d=5,h=x+2,center=true);
     translate([w/2-x/2,0,x/2-1.5]) cylinder(d1=5,d2=10,h=3,center=true);
     translate([x/2-w/2,0,x/2-1.5]) cylinder(d1=5,d2=10,h=3,center=true);
+    translate([0,0,l-10]) rotate([0,90,0]) cylinder(d=w-x-x,h=x+2,center=true);
+    
 }
 
 difference() {
@@ -29,6 +31,8 @@ difference() {
     translate([-x*2,0,x*2]) rotate([90,0,0]) cylinder(h=w+2,d=3*x,center=true);
     translate([w/2-x/2,0,x/2-1]) cylinder(d=10,h=x*2,center=true);
     translate([x/2-w/2,0,x/2-1]) cylinder(d=10,h=x*2,center=true);
+    translate([0,0,l-10]) rotate([0,90,0]) cylinder(d=w-x-x,h=w,center=true);
+    
 }
 
 difference() {
@@ -40,7 +44,7 @@ difference() {
 difference() {
     intersection() {
         translate([x/2,0,l+x/2]) rotate([90,0,0]) cylinder(d=2*x,h=w,center=true);
-        translate([0,0,l+x/2]) rotate([0,60,0]) cube([x*2,w,x*4],center=true);
+        //translate([0,0,l+x/2]) rotate([0,60,0]) cube([x*2,w,x*4],center=true);
     }
     
     translate([0,0,l+x]) cube([x*3,w-x-x,x*3],center=true);
