@@ -7,7 +7,7 @@ d1 = 82.5;
 d2 = 71.5;
 
 // handlebar diameter, also height between top and bottom diameters
-hd = 25;
+hd = 31.8;
 
 // thickness of cup loop
 th = 5;
@@ -16,7 +16,7 @@ th = 5;
 xo = 45;
 
 // clamp offset 
-yo = 10;
+yo = 13.5;
 
 // clamp screw hole diameter
 sd = 3;
@@ -41,8 +41,8 @@ rotate([0,180,0]) {
             union() {
                 translate([0,d1/4+d2/4+yo+xr,0]) rotate([0,90,0]) cylinder(h=xo,d=hd+xr*2,center=true);        
                 translate([0,d1/4+d2/4+5,0]) cube([xo,yo*2,hd+xr*2],center=true);
-                translate([-xo/4,d1/4+d2/4+yo,-hd/2-xr-1]) rotate([90,90,0]) cylinder(h=xo/2,d=sd*4,center=true);
-                translate([+xo/4,d1/4+d2/4+yo,-hd/2-xr-1]) rotate([90,90,0]) cylinder(h=xo/2,d=sd*4,center=true);
+                translate([-xo/4,d1/4+d2/4+yo,-hd/2-xr-1]) rotate([90,90,0]) cylinder(h=yo*2,d=sd*4,center=true);
+                translate([+xo/4,d1/4+d2/4+yo,-hd/2-xr-1]) rotate([90,90,0]) cylinder(h=yo*2,d=sd*4,center=true);
             }
     
             // cup clearance        
@@ -51,9 +51,9 @@ rotate([0,180,0]) {
             // clamp slot
             translate([0,d1/4+d2/4+yo+xr,-20]) cube([xo+2,2,xo+2],center=true);
             
-            // 
-            translate([-xo/4,d1/4+d2/4+yo+1,-hd/2-xr-1]) rotate([90,90,0]) cylinder(h=xo/2,d=sd,center=true);
-            translate([xo/4,d1/4+d2/4+yo+1,-hd/2-xr-1]) rotate([90,90,0]) cylinder(h=xo/2,d=sd,center=true);
+            // screw holes 
+            translate([-xo/4,d1/4+d2/4+yo+1,-hd/2-xr-1]) rotate([90,90,0]) cylinder(h=yo*2,d=sd,center=true);
+            translate([xo/4,d1/4+d2/4+yo+1,-hd/2-xr-1]) rotate([90,90,0]) cylinder(h=yo*2,d=sd,center=true);
     
         }
     }
