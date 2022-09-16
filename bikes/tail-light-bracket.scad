@@ -11,6 +11,9 @@ tt = 10;    // thickness of whole thing less extensions
 
 td = 3;    // cable tie hole diameter
 
+
+// CHECK NUT SIZES WHEN YOU FIND THEM
+
 mw = 45;   // mounting hole width
 md = 5;    // mounting hole diameter
 nd = 10;    // nut diameter (point to point not AF
@@ -18,8 +21,19 @@ nt = 5;     // nut thickness
 
 $fn=64;
 
+cr = 2;  // corner radius
+
+module roundedcube(lx,ly,lz,cr) {
+    hull() {
+        for (sx=[-1,1]) for (sy=[-1,1]) for (sz=[-1,1]) {
+            translate([sx*(lx/2-cr),sy*(ly/2-cr),sz*(lz/2-cr)]) sphere(r=cr);
+        }
+    }
+}
+
 difference() {
-    cube([bw+xw*2,ch+xh*2,tt+xt], center=true);
+    roundedcube(bw+xw*2, ch+xh*2, tt+xt, cr);
+    //cube([bw+xw*2,ch+xh*2,tt+xt], center=true);
     translate([0,0,tt/2+5]) cube([bw, ch+xh*2+2, 10], center=true);
     translate([co,0,0]) cube([cw,ch,tt+xt+2], center=true);
     translate([cw/2+co+td/2,0,0]) rotate([90,0,0]) cylinder(h=1000, d=td, center=true); 
