@@ -1,3 +1,6 @@
+// An aperiodic monotile cookie cutter
+// See https://cs.uwaterloo.ca/~csk/hat/
+
 points=[
     [0,0],
     [-1.5,-0.8660254037844386],
@@ -14,7 +17,7 @@ points=[
     [0,1.7320508075688772]
   ];
 
-size = 20;
+size = 10;
 
 module cutter() {
     for (n = [0 : len(points)-1]) {
@@ -33,9 +36,7 @@ module cutter() {
 }
 
 cutter();
-translate([-6,75,0]) mirror([1,0,0]) rotate([0,0,-60]) cutter();
 
-/*difference() {
-    scale([20,20,20]) einstein();
-    offset(-1) scale([20,20,22]) einstein();
-}*/
+// reflected version to save you flipping
+// the dough ...
+translate([-6,41,0]) mirror([1,0,0]) rotate([0,0,-60]) cutter();
