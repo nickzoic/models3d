@@ -8,7 +8,7 @@ d2 = 7;
 d3 = 10;
 
 // stripe diameter (max)
-d4 = 13;
+d4 = 14;
 
 // brime cone diameter
 d5 = 15;
@@ -75,8 +75,11 @@ module stripe4() {
 
 module stripe5() {
     difference() {
-        cylinder(d1=(d3+d4)/2,d2=d4,h=h3);
-        cylinder(d=d2+0.5,h=h3);
+        union() {
+            cylinder(d1=(d3+d4)/2,d2=d4+1,h=h3);
+            translate([0,0,h3]) cylinder(d=d4+1,h=1);
+        }
+        cylinder(d=d2+0.5,h=h3+1);
     }
 }
         
@@ -92,9 +95,9 @@ module assembled_hat() {
 
 module parts_red() {
     pin();
-    translate([(d5+d4+1)/2,0,0]) stripe1();
-    translate([d5+d4,0,0]) stripe5();
-    translate([d5+d4+d3+2,0]) stripe3();
+    translate([d5+d4,0,h3])  rotate([0,180,0]) stripe1();
+    translate([(d5+d4-1)/2,0,0])stripe5();
+    translate([d5+d4+d3+2.5,0]) stripe3();
 }
 
 module parts_white() {
@@ -104,5 +107,38 @@ module parts_white() {
     translate([(d1+d4)/2,-d4/2,0]) stripe4();
 }
     
+/*
+// TEST PRINT
 parts_red();
 translate([0,25,0]) parts_white();
+*/
+
+/*
+// 30 PINS
+for (x = [0:5]) {
+    for (y = [0:4]) {
+        translate([x*(d5-2),(y+x%2/2)*(d5+0.25),0]) pin();
+    }
+}
+*/
+
+
+// 21 SETS OF RED STRIPES
+for (x = [0:2]) {
+    for (y = [0:6]) {
+        translate([x*40,y*15,0]) stripe1();
+        translate([x*40+13+(14.5*(y%2)),y*15,0]) stripe3();
+        translate([x*40+26-(11.5*(y%2)),y*15,0]) stripe5();
+    }
+}
+
+/*
+// 20 SETS OF BRIMS & WHITE STRIPES 
+for (x = [0:4]) {
+    for (y = [0:3]) {
+        translate([x*26,y*26,0]) brim();
+        translate([x*26,y*26,0]) stripe2();
+        translate([y*26+13,x*26-13,0]) stripe4();
+    }
+}
+*/
