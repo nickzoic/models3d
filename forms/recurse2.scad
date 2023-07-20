@@ -1,5 +1,5 @@
 $fn=20;
-limit = 4;
+limit = 12;
 
 module fnord(x) {
     cylinder(h=x*2,d1=x,d2=x-1);
@@ -11,10 +11,12 @@ module fnord(x) {
     }
     if (x==limit) {
         translate([0,0,2*x])
-        sphere(d=8);
+        sphere(d=x*1.5);
     }
 }
 
-fnord(12);
-cylinder(d1=50,d2=50,h=3);
-translate([0,0,3]) cylinder(d1=50,d2=10,h=5);
+fnord(20);
+translate([0,0,-33]) cylinder(d1=150,d2=150,h=10);
+translate([0,0,-23]) cylinder(d1=150,d2=50,h=10);
+translate([0,0,-13]) cylinder(d1=50,d2=20,h=13);
+

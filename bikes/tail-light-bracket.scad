@@ -1,23 +1,21 @@
-bw = 53;  // bracket width
+bw = 52;  // bracket width
 xw = 5;    // extension width past bracket
-xt = 3;    // xtension thickness
+xt = 2.5;    // xtension thickness
 
-cw = 28;   // clip width
-co = 2.5;  // clip offset (widthwise)
+cw = 27;   // clip width
+co = 2;  // clip offset (widthwise)
 ch = 18;   // clip height
 xh = 5;    // extra each side of clip
 
 tt = 10;    // thickness of whole thing less extensions
 
-td = 3;    // cable tie hole diameter
+td = 4;    // cable tie hole diameter
+ts = 20 ;   // cable tie spacing
 
-
-// CHECK NUT SIZES WHEN YOU FIND THEM
-
-mw = 45;   // mounting hole width
+mw = 38;   // mounting hole width
 md = 5;    // mounting hole diameter
-nd = 10;    // nut diameter (point to point not AF
-nt = 5;     // nut thickness
+nd = 9  ;    // nut diameter (point to point not AF)
+nt = 6;     // nut thickness
 
 $fn=64;
 
@@ -32,14 +30,13 @@ module roundedcube(lx,ly,lz,cr) {
 }
 
 difference() {
-    roundedcube(bw+xw*2, ch+xh*2, tt+xt, cr);
-    //cube([bw+xw*2,ch+xh*2,tt+xt], center=true);
-    translate([0,0,tt/2+5]) cube([bw, ch+xh*2+2, 10], center=true);
-    translate([co,0,0]) cube([cw,ch,tt+xt+2], center=true);
-    translate([cw/2+co+td/2,0,0]) rotate([90,0,0]) cylinder(h=1000, d=td, center=true); 
-    translate([-cw/2-co-td/2,0,0]) rotate([90,0,0]) cylinder(h=1000, d=td, center=true); 
-    translate([mw/2,0,0]) cylinder(h=1000,d=md,center=true);
-    translate([-mw/2,0,0]) cylinder(h=1000,d=md,center=true);
-    translate([mw/2,0,-tt-xt/2]) cylinder(h=nt*2,d=nd,$fn=6);
-    translate([-mw/2,0,-tt-xt/2]) cylinder(h=nt*2,d=nd,$fn=6);
+    translate([0,0,(tt+xt)/2]) roundedcube(bw+xw*2, ch+xh*2, tt+xt, cr);
+    translate([0,0,tt+5]) cube([bw, ch+xh*2+2, 10], center=true);
+    translate([co,0,0]) cube([cw,ch,100], center=true);
+    
+    for (x=[-1,1]) {
+        translate([x*ts/2,0,tt]) cube([td, ch+xh*2, td], center=true);
+        translate([x*mw/2,0,0]) cylinder(h=1000,d=md,center=true);
+        translate([x*mw/2,0,0]) rotate([0,0,90]) cylinder(h=nt,d=nd,$fn=6);
+    }
 }

@@ -1,15 +1,12 @@
 $fn=50;
 
-version = "4";
-
-// XXX TODO allow for rounded corners on saddle slot
-// using ye old rounded_cube()
+version = "5";
 
 sl = 60;  // saddle slot length
 st = 2.8;   // saddle slot thick
 ss = 4;   // saddle slot depth
 
-sd = 1;       // saddle diameter
+sd = 0.5;       // saddle diameter
 sx = 15;  // string spacing
 
 
@@ -24,7 +21,7 @@ sx = 15;  // string spacing
 sn = 4;               // number of strings
 shs = [ .75, .75, .75, .75];  // heights
 sgs = [ 0, 0, 0, 0 ]; // groove diameter
-scs = [ 0.75, 1.25, 1.25, 0.75 ]; // compensation for each string
+scs = [ 0.825, 1.25, 1.5, 1 ]; // compensation for each string
 
 difference() {
   translate([0,0,-ss/2]) cube([sl, st, ss], center=true);
