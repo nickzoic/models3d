@@ -1,7 +1,7 @@
 $fn=32; 
 font = "FreeMono:style=Bold";
 
-label = ["1", "2", "3", "4", "5", "6"];
+label = ["A", "B", "C", "D", "E", "F"];
 size = 20;
 edge = 2.5;
 
@@ -18,7 +18,7 @@ module body() {
 }
 
 module face(n) {
-    translate(xlate[n]*(size/2-1)) rotate(rot[n]) color(colors[n]) linear_extrude(1) text(label[n], font=font, size=(size-edge)*4/5, halign="center", valign="center");
+    translate(xlate[n]*(size/2-2)) rotate(rot[n]) color(colors[n]) linear_extrude(2) text(label[n], font=font, size=(size-edge)*4/5, halign="center", valign="center");
 }
 
 material = 0;
