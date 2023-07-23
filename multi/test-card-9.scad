@@ -10,8 +10,8 @@ module m1() {
 
 module seg(n) {
     translate([45,35,0])
-    rotate([0,0,n*40])
-    rotate_extrude(angle=40)
+    rotate([0,0,90-n*40])
+    rotate_extrude(angle=-40)
     polygon([
         [0,0],
         [30,0],
@@ -23,6 +23,7 @@ module seg(n) {
 material = 0;
 if (material == 0) {
     m1();
+    color("magenta") seg(0);
     color("red") seg(1);
     color("orange") seg(2);
     color("yellow") seg(3);
@@ -31,7 +32,6 @@ if (material == 0) {
     color("blue") seg(6);
     color("purple") seg(7);
     color("violet") seg(8);
-    color("magenta") seg(9);
 } else if (material <= 10) {
     seg(material-1);
 }
