@@ -125,12 +125,14 @@ if (material == 0) {
     }
 } else if (material == 1) {
     difference() {
-        rings();
+        union() {
+            rings();
+            first();
+        }
         holes();
     }
 } else if (material == 2) {
     difference() {
-       first();
        second();
        third();
        fourth();
@@ -138,18 +140,11 @@ if (material == 0) {
     }
 } else if (material == 3) {
 difference() {
-       second();
        third();
        fourth();
        rings();
     }
 } else if (material == 4) {
-difference() {
-       third();
-       fourth();
-       rings();
-    }
-} else if (material == 5) {
 difference() {
        fourth();
        rings();
