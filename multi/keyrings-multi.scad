@@ -5,12 +5,12 @@
    https://creativecommons.org/share-your-work/public-domain/cc0/
 */
 
-$fn = 64;
+$fn = 32;
 
-names = ["Jorgie", "Amelia", "Charlotte", "Rhonda", "Cara"];
+names = ["Jorgie", "Amelia"];
 
 offsets = [
-    [ 1, 2 ],  // A
+    [ 2, 2 ],  // A
     [ 0, 0 ],  // B
     [ 0, 0 ],  // C
     [ 0, 0 ],  // D
@@ -19,7 +19,7 @@ offsets = [
     [ 0, 0 ],  // G
     [ 0, 0 ],  // H
     [ 0, 0 ],  // I
-    [ 1, 1 ],  // J
+    [ 1, 2 ],  // J
     [ 0, 0 ],  // K
     [ 2, 3 ],  // L
     [ 0, 0 ],  // M
