@@ -73,7 +73,7 @@ module flower() {
     intersection() {
     
         union() {
-            for (a=[0:4]) rotate([0,45,a*72]) rotate([0,0,-25]) rotate_extrude(angle=50) polygon([
+            for (a=[0:4]) rotate([0,35,a*72]) rotate([0,0,-25]) rotate_extrude(angle=50) polygon([
                 [0,-60],
                 [80,-60],
                 [80,60],
@@ -82,7 +82,7 @@ module flower() {
         }
         difference() {
             sphere(d=100, $fn=100);
-            translate([0,0,2]) sphere(d=96, $fn=100);
+            translate([0,0,2]) sphere(d=93, $fn=100);
         }
     }
 }
@@ -111,8 +111,10 @@ module orb() {
 
 //orb();
 
+/*
 translate([-60,0,0]) rotate([180,0,0])
 translate([0,0,-31]) stem();
+*/
 
 intersection() {
 difference() {

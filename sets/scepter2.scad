@@ -34,8 +34,12 @@ translate([0,0,25])
 
 module circles() {
 // circles around rhinestones
-    for (a=[0:3]) rotate([0,0,a*90]) translate([d1/2-4,0,25]) rotate([0,90,0]) rotate_extrude() translate([10,0,0]) circle(d=5);
-    translate([0,0,25]) rotate_extrude($fn=100) translate([d1/2-2,0,0]) circle(d=5);
+    for (a=[0:3]) rotate([0,0,a*90]) translate([d1/2-3,0,25]) rotate([0,90,0]) rotate_extrude() translate([10,0,0]) circle(d=5);
+    
+    translate([0,0,25]) rotate_extrude($fn=100) translate([d1/2-1,0,0]) circle(d=5);
+    translate([0,0,25]) rotate([90,0,0]) rotate_extrude($fn=100) translate([d1/2-1,0,0]) circle(d=5);
+    translate([0,0,25]) rotate([0,90,0]) rotate_extrude($fn=100) translate([d1/2-1,0,0]) circle(d=5);
+
 }
 
 module cutouts() {
@@ -58,9 +62,9 @@ function stem_func(y) = y^2 * 16 + 5;
 
 module stem() {
     rotate_extrude() polygon(concat(
-        [ [ 0, 3 ] ],
+        [ [ 3.3, 3 ] ],
         [ for (y=[3:31]) [ stem_func(y/16-1), y ] ],
-        [ [ 0, 31 ] ],
+        [ [ 3.3, 30 ] ],
     ));
 }
 
@@ -70,12 +74,12 @@ translate([0,0,41.5]) stem();
 translate([0,0,22]) beads();
 
     circles();
-stars();
+//stars();
     
 translate([0,0,25]) sphere(d=50);
 cylinder(h=25,d=30);
 }
-translate([0,0,-30]) cylinder(d=26,h=65);
+translate([0,0,-30]) cylinder(d=25.75,h=65);
 translate([0,0,35]) cylinder(d1=26,d2=4,h=10);
 cylinder(d=4,h=100);
 cutouts();
@@ -87,19 +91,42 @@ cutouts();
 translate([50,0,0]) {
 difference() {
 union() {
-    circles();
-stars();
-
+//for (a = [-45,0,45]) 
+//translate([0,0,25]) rotate([0,a,0])  rotate_extrude($fn=100) translate([d1/2,0,0]) circle(d=5);
     
 translate([0,0,25]) sphere(d=50);
 cylinder(h=25,d=30);
+circles();
 }
-translate([0,0,-30]) cylinder(d=26,h=65);
-translate([0,0,35]) cylinder(d1=26,d2=4,h=10);
+//difference() {
+//rotate([0,0,45]) translate([0,0,40]) scale([1.6,2.0,10]) star();
+//translate([0,0,25]) sphere(d=45);
+//}
+
 cutouts();
+translate([0,0,-30]) cylinder(d=25.75,h=65);
+translate([0,0,35]) cylinder(d1=26,d2=4,h=10);
 //cube(200);
-translate([0,0,50]) scale([1.4,1.4,10]) star();
+}
+
 
 }
 
-}
+// ring
+
+for (a=[-35,35])
+translate([25,a,0])
+difference() {
+    rotate_extrude() {
+        hull() {
+        translate([12.5,2.5]) circle(d=5);
+        translate([12.5,27.5]) circle(d=5);
+        }
+        }
+     cylinder(d=25.75,h=100,center=true);
+     translate([0,0,15])
+    for (a=[0:3]) rotate([0,0,a*90+45])
+    translate([14,0,0]) rotate([90,0,90]) star();
+    }
+       
+
