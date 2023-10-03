@@ -18,7 +18,9 @@ faces = [
     [0,180,0]
 ];
 
-font = "Comic Sans MS:style=Regular";
+//font = "Lato:style=Heavy";
+//font = "SauceCodePro Nerd Font:style=Black";
+font = "Noto Sans:style=Condensed Bold";
 
 text = [
     ["what made", "you laugh", "today?"],
@@ -35,7 +37,7 @@ text = [
     ["how were", "you helpful", "today?"],
 ];
 
-colors = [ 2, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 3 ];
+colors = [ 2, 3, 4, 3, 4, 5, 5, 2, 5, 2, 4, 3 ];
 
 module textn(n) {
     rotate(faces[n]) {
@@ -58,14 +60,17 @@ module texts(c) {
 
 module dodec() {
     minkowski() {
-        intersection_for(n = [0:11]) {
-            rotate(faces[n]) {
-                translate([0,0,r-m/2]) {
-                    cube([m,m,m], center=true);
+        intersection() {
+            intersection_for(n = [0:11]) {
+                rotate(faces[n]) {
+                    translate([0,0,r-m/2]) {
+                        cube([m,m,m], center=true);
+                    }
                 }
             }
+            sphere(d=71, $fn=256);
         }
-        sphere(r=2, $fn=32);
+        sphere(r=2, $fn=64);
     }
 }
 
@@ -74,14 +79,23 @@ if (material == 0) {
     dodec();
     color("red") texts(2);
     color("green") texts(3);
+    color("purple") texts(4);
+    color("blue") texts(5);
 } else if (material == 1) {
     difference() {
         dodec();
         texts(2);
         texts(3);
+        texts(4);
+        texts(5);
     }
 } else if (material == 2) {
     texts(2);
 } else if (material == 3) {
     texts(3);
+} else if (material == 4) {
+    texts(4);
+} else if (material == 5) {
+    texts(5);
+
 }
