@@ -19,36 +19,41 @@ module cyl_between(P, d1, Q, d2){
         cylinder(h=L, d1=d1, d2=d2, $fn=30);
 }
 
-front_wheel_diameter = 1000;
+front_wheel_diameter = 900;
 rear_wheel_diameter = 700;
 front_wheel_width = 50;
-rear_wheel_width = 500;
-wheelbase = 2300;
+rear_wheel_width = 150;
+wheelbase = 1400;
 seat_tube_angle = 70;
-seat_tube_up = 200;
-seat_tube_down = 500;
+seat_tube_up = 500;
+top_tube_up = 450;
+seat_stays_up = 300;
+seat_tube_down = 300;
 fork_angle = 71;
-fork_offset = 150;
+fork_offset = 50;
 fork_top_diameter = 100;
 steer_length = 150;
 stem_height = 100;
 stem_length = 100;
 num_spokes = 32;
-steer_tube_diameter = 100;
+steer_tube_diameter = 80;
 seat_tube_diameter = 50;
-extra_seat_tube_space = 50;
+extra_seat_tube_space = 20;
+
 
 rear_axle_height = (rear_wheel_diameter+rear_wheel_width)/2;
 front_axle_height = (front_wheel_diameter+front_wheel_width)/2;
 seat_tube_clearance = (rear_wheel_diameter+rear_wheel_width+seat_tube_diameter)/2+extra_seat_tube_space;
 offset_stays = rear_wheel_width/2+15;
 offset_forks = front_wheel_width/2+15;
+fork_width = front_wheel_width + 50;
+dropout_width = rear_wheel_width + 50;
 
 module rear_wheel() {
     translate([0,rear_axle_height,0]) {
         
         rotate_extrude() translate([rear_wheel_diameter/2,0,0]) circle(d=rear_wheel_width);
-        cylinder(h=rear_wheel_width+20,d=20,center=true);
+        cylinder(h=dropout_width,d=20,center=true);
     }
     for (n = [0:num_spokes]) {
         translate([0,rear_axle_height,(n%2)*20-10])
@@ -57,11 +62,19 @@ module rear_wheel() {
 
 }
 
+module rear_wheel_clearance() {
+    hull() {
+        translate([0,rear_axle_height,0]) {
+        rotate_extrude() translate([rear_wheel_diameter/2,0,0]) circle(d=rear_wheel_width+20);
+        }
+    }
+}
+
 // front wheel
 module front_wheel() {
     translate([wheelbase,front_axle_height,0]) {
         rotate_extrude() translate([front_wheel_diameter/2,0,0]) circle(d=front_wheel_width);
-        cylinder(h=front_wheel_width+20,d=20,center=true);
+        cylinder(h=fork_width,d=20,center=true);
     }
     for (n = [0:num_spokes]) {
         translate([wheelbase,front_axle_height,(n%2)*20-10])
@@ -70,61 +83,89 @@ module front_wheel() {
 
 }
 
+module front_wheel_clearance() {
+    hull() {
+        translate([wheelbase,front_axle_height,0]) {
+        rotate_extrude() translate([front_wheel_diameter/2,0,0]) circle(d=front_wheel_width+20);
+        }
+    }
+}
+        
 // seat post
 module seat_tube() {
     translate([0, rear_axle_height, 0])
-    rotate([0,0,90-seat_tube_angle]) translate([seat_tube_clearance,,0]) rotate([-90,0,0]) translate([0,0,(seat_tube_up-seat_tube_down)/2]) cylinder(h=seat_tube_up+seat_tube_down,d=seat_tube_diameter,center=true);
+    rotate([0,0,90-seat_tube_angle]) translate([seat_tube_clearance,0,0]) rotate([-90,0,0]) translate([0,0,(seat_tube_up-seat_tube_down)/2]) cylinder(h=seat_tube_up+seat_tube_down,d=seat_tube_diameter,center=true);
 }
 
 module bb() {
     translate([0, rear_axle_height, 0])
-    rotate([0,0,90-seat_tube_angle]) translate([seat_tube_clearance,,0]) translate([0,-seat_tube_down,0]) cylinder(h=rear_wheel_width+20,d=50, center=true);
+    rotate([0,0,90-seat_tube_angle]) translate([seat_tube_clearance,0,0]) translate([0,-seat_tube_down,0]) cylinder(h=rear_wheel_width+20,d=50, center=true);
 }
 
 module seat_stays() {
-    translate([0, rear_axle_height, 0])
-rotate([0,0,90-seat_tube_angle]) translate([seat_tube_clearance,,0]) translate([0,seat_tube_up-50,0]) cylinder(h=rear_wheel_width+20,d=50, center=true);
-    
-    for (zz=[-1,1])
-    hull() {
-        translate([0,rear_axle_height,zz*offset_stays])
-        cylinder(d=30,h=10,center=true);
-        translate([0, rear_axle_height, 0])
-rotate([0,0,90-seat_tube_angle]) translate([seat_tube_clearance,,0]) translate([0,seat_tube_up-50,zz*offset_stays]) cylinder(h=10,d=50, center=true);
+    seat_stay_angle = 60;
+    difference() {
+        union() {
+            hull() {
+               translate([0, rear_axle_height, 0]) rotate([0,0,90-seat_tube_angle]) translate([seat_tube_clearance,0,0]) translate([0,seat_stays_up,0]) sphere(d=seat_tube_diameter);
+                translate([0, rear_axle_height, 0]) rotate([0,0,seat_stay_angle]) translate([rear_wheel_diameter/2+rear_wheel_width/2,0,0]) rotate([0,90,0]) cylinder(d=50,h=25);
+            }
+            hull() { 
+                translate([0,rear_axle_height,0]) cylinder(d=20,h=dropout_width,center=true);
+                translate([0,rear_axle_height,0]) rotate([90,0,seat_stay_angle]) translate([rear_wheel_diameter/2,0,0]) cylinder(h=50,d=dropout_width,center=true);    
+                
+            }   
+        }
+        rear_wheel_clearance();
+    }
+}
+
+module chain_stays() {
+    chain_stay_angle = -18;
+    difference() {
+        union() {
+            hull() {
+               translate([0, rear_axle_height, 0]) rotate([0,0,90-seat_tube_angle]) translate([seat_tube_clearance,0,0]) translate([0,-seat_tube_down,0]) sphere(d=seat_tube_diameter);
+                translate([0, rear_axle_height, 0]) rotate([0,0,chain_stay_angle]) translate([rear_wheel_diameter/2+rear_wheel_width/2,0,0]) rotate([0,90,0]) cylinder(d=50,h=25);
+            }
+            hull() { 
+                translate([0,rear_axle_height,0]) cylinder(d=20,h=dropout_width,center=true);
+                translate([0,rear_axle_height,0]) rotate([90,0,chain_stay_angle]) translate([rear_wheel_diameter/2,0,0]) cylinder(h=50,d=dropout_width,center=true);    
+                
+            }   
+        }
+        rear_wheel_clearance();
     }
 }
     
-module chain_stays() {
+module xchain_stays() {
     for (zz = [-1,1]) {
         // chain stays
         hull() {
             translate([0,rear_axle_height,zz*offset_stays])
             cylinder(d=30,h=10,center=true);
             translate([0, rear_axle_height, 0])
-    rotate([0,0,90-seat_tube_angle]) translate([seat_tube_clearance,,0]) translate([0,-seat_tube_down,zz*offset_stays]) cylinder(h=10,d=50, center=true);
+    rotate([0,0,90-seat_tube_angle]) translate([seat_tube_clearance,0,0]) translate([0,-seat_tube_down,zz*offset_stays]) cylinder(h=10,d=50, center=true);
         }
     }
 }
 
 module forks() {
-    translate([wheelbase,front_axle_height,0])
-rotate([0,0,180-fork_angle]) translate([front_wheel_diameter/2+front_wheel_width*1.5,0,0]) rotate([0,0,0]) translate([0, fork_offset,0]) cylinder(h=100,d=fork_top_diameter,center=true);
-
-    for (zz = [-1,1]) {
-        hull() {
-    translate([wheelbase,front_axle_height,0])
-    rotate([0,0,180-fork_angle]) translate([(front_wheel_diameter/2+front_wheel_width/2)+30,0,0]) rotate([0,0,0]) translate([0, fork_offset,zz*offset_forks]) cylinder(h=10,d=fork_top_diameter,center=true);
-            translate([wheelbase,front_axle_height,zz*offset_forks])
-        cylinder(h=10,d=50,center=true);    
+    difference() {
+        
+        translate([wheelbase,front_axle_height,0]) hull() {
+            cylinder(d=30,h=front_wheel_width*1.5,center=true);
+            rotate([0,0,180-fork_angle]) translate([front_wheel_diameter/2,0,0]) translate([0, fork_offset,0]) sphere(d=fork_width);
+            
         }
+        front_wheel_clearance();
     }
 }
-
 
 module top_tube() {
     hull() {
         translate([0, rear_axle_height, 0])
-    rotate([0,0,90-seat_tube_angle]) translate([seat_tube_clearance,,0]) translate([0,seat_tube_up-50,0]) sphere(d=seat_tube_diameter);
+    rotate([0,0,90-seat_tube_angle]) translate([seat_tube_clearance,0,0]) translate([0,top_tube_up,0]) sphere(d=seat_tube_diameter);
         
     translate([wheelbase,front_axle_height,0])
     rotate([0,0,180-fork_angle]) translate([front_wheel_diameter/2+front_wheel_width*1.5,0,0]) translate([steer_length+100, fork_offset, 0]) sphere(d=steer_tube_diameter);
@@ -145,7 +186,7 @@ hull() {
 translate([wheelbase,front_axle_height,0])
 rotate([0,0,180-fork_angle]) translate([front_wheel_diameter/2+front_wheel_width*1.5,0,0]) translate([100, fork_offset, 0]) sphere(d=steer_tube_diameter);
 translate([0, rear_axle_height, 0])
-rotate([0,0,90-seat_tube_angle]) translate([seat_tube_clearance,,0]) translate([0,-seat_tube_down,0]) sphere(d=seat_tube_diameter);
+rotate([0,0,90-seat_tube_angle]) translate([seat_tube_clearance,0,0]) translate([0,-seat_tube_down,0]) sphere(d=seat_tube_diameter);
 }
 }
     
