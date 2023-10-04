@@ -7,7 +7,7 @@ revw = 65;     // width at rear
 thick = 2;     // max thickness
 fork = 48;    // fore-aft distance between holes
 center = 16;  // center rib width
-holes = 80;   // width between side holes
+holes = 70;   // width between side holes
 
 holesize = 4;
 
@@ -28,6 +28,7 @@ points = [
         [-width/2, 0],
         for (g = [0:grooves-1]) each [
             [ center/2 + g * groove_space, 0],
+            [ center/2 + g * groove_space + groove_width/2, groove_height ],
             [ center/2 + g * groove_space + groove_width/2 + groove_extra, groove_height ],
             [ center/2 + g * groove_space + groove_width + groove_extra, 0]
         ],
@@ -57,7 +58,7 @@ difference() {
         rotate([90,0,0]) linear_extrude(height=fwd*2, center=true) polygon(points);
         
         // XXX for test printing
-        //cube([200,20,100], center=true);
+        cube([200,20,100], center=true);
         }
         
     for (x=[-1,0,1]) {
@@ -72,5 +73,5 @@ difference() {
     translate([0,0,pinholeheight+thick])
     cube([holesize,pindia,holesize/2], center=true);
    
-translate([0,0,pinheight+thick-1]) linear_extrude(2) text("1", size=8,valign="center", halign="center");
+translate([0,0,pinheight+thick-1]) linear_extrude(2) text("2", size=8,valign="center", halign="center");
 }
