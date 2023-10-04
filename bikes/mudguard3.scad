@@ -21,7 +21,7 @@ grooves = 16;
 groove_height = thick * 2 / 3;
 groove_width = 2 * tan(90/grooves) * groove_height;
 groove_space = 1.5;
-groove_extra = 0.125;
+groove_extra = 0.25;
 
 points = [
         [-width/2, thick/2],
@@ -58,7 +58,7 @@ difference() {
         rotate([90,0,0]) linear_extrude(height=fwd*2, center=true) polygon(points);
         
         // XXX for test printing
-        cube([200,20,100], center=true);
+        cube([200,15,100], center=true);
         }
         
     for (x=[-1,0,1]) {
@@ -72,6 +72,6 @@ difference() {
     cylinder(h=pinheight+thick, d1=pindia, d2=pindia-2);
     translate([0,0,pinholeheight+thick])
     cube([holesize,pindia,holesize/2], center=true);
-   
-translate([0,0,pinheight+thick-1]) linear_extrude(2) text("2", size=8,valign="center", halign="center");
-}
+}   
+translate([0,0,pinheight+thick-1]) linear_extrude(2) text("3", size=8,valign="center", halign="center");
+
