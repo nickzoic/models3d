@@ -1,3 +1,11 @@
+// v4 worked but slots closed up somewhat
+// on the base layer
+// and had to be cut free with a knife.
+// also the pin hole was way off so I drilled a new one.
+// it took 4 hours so I installed it anyway.
+
+// XXX add a little chamfer?
+
 dia = 50;     // corner diameter
 fwd = 135;     // projection fwd
 rev = 75;       // projection rear
@@ -13,7 +21,7 @@ holesize = 4;
 
 pinheight = 15;
 pindia = 14;
-pinholeheight=4.5;
+pinholeheight=8;
 
 $fn = 200;
 
@@ -24,7 +32,7 @@ groove_space = 1.5;
 groove_extra = 0.25;
 
 brim_thick = 0.2;
-brim_width = 5;
+brim_width = 1;
 
 points = [
         [-width/2, thick/2],
@@ -71,27 +79,37 @@ difference() {
     }
 }
 
-// kind of a brim
+intersection() {
+union() {
+    translate([center/2-1,-rev-brim_width,0])
+    cube([grooves*groove_space+2,fwd+rev+2*brim_width,brim_thick]);
+    translate([-center/2-grooves*groove_space-1,-rev-brim_width,0])
+    cube([grooves*groove_space+2,fwd+rev+2*brim_width,brim_thick]);
+}
 difference() {
 hull() {
             for (x=[-1,1]) {
-                translate([x*(width/2-dia/2),0,0]) cylinder(d=dia+2*brim_width,h=brim_thick);
-                translate([x*(fwdw/2-dia/2),fwd-dia/2,0]) cylinder(d=dia+2*brim_width,h=brim_thick);
-                translate([x*(revw/2-dia/2),-rev+dia/2,0]) cylinder(d=dia+2*brim_width,h=brim_thick);
+                translate([x*(width/2-dia/2),0,0]) cylinder(d=dia+2*brim_width,h=thick);
+                translate([x*(fwdw/2-dia/2),fwd-dia/2,0]) cylinder(d=dia+2*brim_width,h=thick);
+                translate([x*(revw/2-dia/2),-rev+dia/2,0]) cylinder(d=dia+2*brim_width,h=thick);
             }
         }
-        hull() {
+           hull() {
             for (x=[-1,1]) {
                 translate([x*(width/2-dia/2),0,0]) cylinder(d=dia,h=thick);
                 translate([x*(fwdw/2-dia/2),fwd-dia/2,0]) cylinder(d=dia,h=thick);
                 translate([x*(revw/2-dia/2),-rev+dia/2,0]) cylinder(d=dia,h=thick);
-                }
+            }
         }
-        }
+   }
+}   
+        
+
+
 difference() {
     cylinder(h=pinheight+thick, d1=pindia, d2=pindia-2);
     translate([0,0,pinholeheight+thick])
-    cube([holesize,pindia,holesize/2], center=true);
+    cube([holesize,pindia,holesize], center=true);
 }   
-translate([0,0,pinheight+thick-1]) linear_extrude(2) text("4", size=8,valign="center", halign="center");
+translate([0,0,pinheight+thick-1]) linear_extrude(2) text("5", size=8,valign="center", halign="center");
 
