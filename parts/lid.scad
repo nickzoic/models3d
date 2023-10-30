@@ -1,13 +1,15 @@
 $fn=200;
 
-d1 = 145;
+d1 = 140;
 d2 = 160;
 d3 = 25;
-d4 = 130;
+d4 = 100;
 r = 2.5;
-h1 = 10;
-h2 = 70;
-k=4;
+h1 = 8;
+h2 = 60;
+h3 = 40;
+k=5;
+z=6;
 
 difference() {
     union() {
@@ -16,7 +18,7 @@ difference() {
         rotate_extrude() {
             polygon( concat(
                 [ [ 0, h1 ] ],
-                [ for (y=[0:h2-h1]) [ (d2-r)/2*((h2-y)/h2)^k, y+2*h1 ] ],
+                [ for (y=[0:0.5:h2-2*h1]) [ ((d2-r)/2-z)*((h2-y)/h2)^k+z, y+2*h1 ] ],
                 [ [ 0, h2 ] ],
             ));
             hull() {
@@ -27,7 +29,7 @@ difference() {
         translate([0,0,h2+(2*h1)-d3+r]) sphere(d=d3);
     
     }
-    translate([0,0,-0.1]) cylinder(d1=d4,d2=r*2,h=h2*2/3);
+    translate([0,0,-0.1]) cylinder(d1=d4,d2=0,h=h3);
    
     // testing
     cube(200);
