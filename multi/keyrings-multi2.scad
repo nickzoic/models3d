@@ -7,19 +7,19 @@
 
 $fn = 32;
 
-names = ["JORGIE", "AMELIA"];
+names = ["JORGIE", "AMELIA", "CARA"];
 
 size = 14;
 font = "Impact";
 scale = 1.5;
-space = size*1.5;
+space = size*2;
 offset = size/3;
 soft = 1;
 
 module texts() {
     for (i=[0:len(names)-1]) {
-        translate([offset,i*space,1.5])
-        linear_extrude(1.5) text(names[i], size=size,font=font,valign="center");
+        translate([offset,i*space,0.5])
+        linear_extrude(2.5) text(names[i], size=size,font=font,valign="center");
     }
 }
 
@@ -38,10 +38,10 @@ module surround() {
             linear_extrude(1) {
                 hull() {
                     translate([0,i*space]) circle(r=6);
-                    translate([offset,i*space]) offset(1.5) text(names[i], size=size,font=font,valign="center");
+                    translate([offset,i*space]) offset(2.5) text(names[i], size=size,font=font,valign="center");
                 }
             }
-            translate([0,i*space,-1]) cylinder(d=6,h=6);
+            translate([0,i*space,-1]) cylinder(d=8,h=6);
         }
     }
     sphere(r=soft);
