@@ -1,9 +1,9 @@
-d1 = 12;
+d1 = 16;
 d2 = 9;
 d3 = 10;
-s = 75;
+s = 70;
 t = 3;
-x = 10;
+x = 5;
 
 $fn=100;
 
@@ -20,9 +20,12 @@ difference() {
     translate([0,-s/2,-1]) cylinder(d=d3,h=t+2);
     translate([0,0,-1]) cylinder(d=s-d1*2,h=t+2);
 }
-translate([0,s/2,0]) cylinder(d=d1*2,h=x+t);
+translate([0,s/2,t]) intersection() {
+    cylinder(d=d1,h=x);
+    scale([d1/x/2,d1/x/2,1]) sphere(r=x);
+}
 
-/*for (a=[-s/2,s/2])
+for (a=[-s/2,s/2])
     translate([a,0,x+t])
         cylinder(h=1,d=s);    
-*/
+
