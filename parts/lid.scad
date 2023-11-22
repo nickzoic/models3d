@@ -32,5 +32,5 @@ difference() {
     translate([0,0,-0.1]) cylinder(d1=d4,d2=0,h=h3);
    
     // testing
-    cube(200);
+    //cube(200);
 }
