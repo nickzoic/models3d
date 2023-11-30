@@ -15,7 +15,7 @@ outer_dia = 20;   // largest diameter
 drop_dia = 8;     // dropout diameter, also the center bit and the width in the dropouts
 drop_wid = 6;     // dropout length, actually
 drop_hei = 15;    // height front center of axle to base plate to clear dropouts
-base_wid = 50;    // base plate width
+base_wid = 40;    // base plate width
 angle = 11.5;     // base plate angle in degrees
 base_thick = 2.5; // base plate thickness
 wiggle = 0.5;  // a bit of wiggle room on the dropout slots;
@@ -50,13 +50,13 @@ rotate([-90,0,0]) difference() {
     
     // screw holes
     for (z=[-10,length+drop_wid*2+10]) {
-        translate([0,0,z]) rotate([-90,0,0]) cylinder(h=drop_hei+base_thick+1,d=8);
+        translate([0,0,z]) rotate([-90,0,0]) cylinder(h=drop_hei+base_thick+1,d=6);
     }
     
     // cable tie holes
     for(x=[-base_wid/3,+base_wid/3]) {
     for (z=[-5,length/4+drop_wid,length/2+drop_wid,length*3/4+drop_wid,length+drop_wid*2+5]) {
-    translate([x,0,z]) cube([4,100,7], center=true);
+    translate([x,0,z]) cube([3,100,5], center=true);
     }
     }
 }
