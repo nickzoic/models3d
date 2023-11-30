@@ -9,6 +9,17 @@ h1 = 10;
 h2 = 60;
 k=22/7;
 
+//d1 = 140;
+//d2 = 160;
+//d3 = 25;
+//d4 = 100;
+//r = 2.5;
+//h1 = 8;
+//h2 = 60;
+//h3 = 40;
+//k=5;
+//z=6;
+
 intersection() {
   difference() {
     union() {
@@ -17,7 +28,7 @@ intersection() {
         rotate_extrude() {
             polygon( concat(
                 [ [ 0, h1 ] ],
-                [ for (y=[0:h2-h1]) [ (d2-r)/2*((h2-y)/h2)^k, y+2*h1 ] ],
+                [ for (y=[0:0.5:h2-2*h1]) [ ((d2-r)/2-z)*((h2-y)/h2)^k+z, y+2*h1 ] ],
                 [ [ 0, h2 ] ],
             ));
             hull() {
@@ -29,9 +40,6 @@ intersection() {
     
     }
     translate([0,0,-0.1]) cylinder(d1=d4,d2=0,h=h2*2/3);
+    //translate([0,0,-0.1]) cylinder(d1=d4,d2=0,h=h3);
   }
-  
-  
-  // test
-  //cube([10,200,400], center=true);
 }
