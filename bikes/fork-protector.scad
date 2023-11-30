@@ -1,24 +1,21 @@
-// first prototype for a little widget to fit between fork legs
+// third prototype for a little widget to fit between fork legs
 // when front wheel is removed and secured in place with skewer
 // to protect fork ends when boxed up.
-
-// XXX ends of plate should be rounded to reduce chance of tearing through box.
-// XXX add cable tie holes to attach to cardboard.
-// XXX add texture on bottom for glueing.
 
 $fn=100;
 
 length = 100;     // length between forks
-bore = 6;         // skewer bore
-inner_dia = 8;    // middle bit diameter.
+bore = 5.5;         // skewer bore
+inner_dia = 10;    // middle bit diameter.
 outer_dia = 20;   // largest diameter
 drop_dia = 8;     // dropout diameter, also the center bit and the width in the dropouts
 drop_wid = 6;     // dropout length, actually
 drop_hei = 15;    // height front center of axle to base plate to clear dropouts
 base_wid = 40;    // base plate width
 angle = 11.5;     // base plate angle in degrees
-base_thick = 2.5; // base plate thickness
-wiggle = 0.5;  // a bit of wiggle room on the dropout slots;
+base_thick = 5; // base plate thickness
+wiggle = 0;  // a bit of wiggle room on the dropout slots;
+hole_size = 5; // holes for screws / cable ties
 
 rotate([-90,0,0]) difference() {
     union() {
@@ -49,14 +46,18 @@ rotate([-90,0,0]) difference() {
     translate([0,0,-1]) cylinder(d=bore,h=length+2*drop_wid+2);
     
     // screw holes
-    for (z=[-10,length+drop_wid*2+10]) {
-        translate([0,0,z]) rotate([-90,0,0]) cylinder(h=drop_hei+base_thick+1,d=6);
+    for (z=[-hole_size*2,length+drop_wid*2+hole_size*2]) {
+        translate([0,0,z]) rotate([-90,0,0]) cylinder(h=drop_hei+base_thick+1,d=hole_size);
     }
     
     // cable tie holes
     for(x=[-base_wid/3,+base_wid/3]) {
-    for (z=[-5,length/4+drop_wid,length/2+drop_wid,length*3/4+drop_wid,length+drop_wid*2+5]) {
-    translate([x,0,z]) cube([3,100,5], center=true);
+    for (z=[-hole_size,length/4+drop_wid,length/2+drop_wid,length*3/4+drop_wid,length+drop_wid*2+hole_size]) {
+    translate([x,0,z]) cube([hole_size,100,hole_size], center=true);
     }
     }
+    
+    translate([0,drop_hei+base_thick-1,length/2+drop_wid])
+    rotate([0,90,90]) linear_extrude(2) text("nick.zoic.org ≈ v3", halign="center", valign="center");
+    
 }
