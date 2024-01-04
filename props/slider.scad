@@ -18,27 +18,35 @@ difference() {
     
     // interior
     hull() {
-        translate([-55,0,0]) cylinder(d=14,h=14,center=true);
-        translate([55,0,0]) cylinder(d=14,h=14,center=true);
+        translate([-55,0,-4]) cylinder(d=14,h=4,center=true);
+        translate([55,0,-4]) cylinder(d=14,h=4,center=true);
+        translate([-55,0,0]) cylinder(d1=14,d2=1,h=8,center=true);
+        translate([55,0,0]) cylinder(d1=14,d2=1,h=8,center=true);
     }
     
     // slot
     hull() {
-        translate([-55,0,-8]) cylinder(d=5,h=8,center=true);
-        translate([55,0,-8]) cylinder(d=5,h=8,center=true);
+        translate([-55,0,-8]) cylinder(d=5,h=10,center=true);
+        translate([55,0,-8]) cylinder(d=5,h=10,center=true);
     }
     
     // access hole
     hull() {
-        translate([-45,0,+8]) cylinder(d=14,h=16,center=true);
-        translate([-55,0,+8]) cylinder(d=14,h=16,center=true);
+        translate([-10,0,+6]) cylinder(d=14,h=16,center=true);
+        translate([10,0,+6]) cylinder(d=14,h=16,center=true);
     }
     
     // screw holes
-    for (x = [55,40,25,10,-15,-30]) {
-        translate([x,0,+8]) cylinder(d=3,h=16,center=true);
+    for (a = [-55, -40, -25, 25, 40, 55]) {
+        translate([a,0,+8]) cylinder(d=3,h=16,center=true);
     }
     
     // label
-    translate([0,0,9]) linear_extrude(2) text("1", halign="center", valign="center");
+    translate([-47.5,0,9]) linear_extrude(2) text("N", halign="center", valign="center");
+    translate([-32.5,0,9]) linear_extrude(2) text("M", halign="center", valign="center");
+    translate([32.5,0,9]) linear_extrude(2) text("v", halign="center", valign="center");
+    translate([47.5,0,9]) linear_extrude(2) text("2", halign="center", valign="center");
+    
+    // testing
+    //translate([0,-500,0]) cube(1000, center=true);
 }
