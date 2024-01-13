@@ -32,20 +32,20 @@ difference() {
     
     // access hole
     hull() {
+        translate([-40,0,+6]) cylinder(d=14,h=16,center=true);
         translate([-10,0,+6]) cylinder(d=14,h=16,center=true);
-        translate([10,0,+6]) cylinder(d=14,h=16,center=true);
     }
     
     // screw holes
-    for (a = [-55, -40, -25, 25, 40, 55]) {
+    for (a = [-55, 10, 25, 40, 55]) {
         translate([a,0,+8]) cylinder(d=3,h=16,center=true);
     }
     
     // label
-    translate([-47.5,0,9]) linear_extrude(2) text("N", halign="center", valign="center");
-    translate([-32.5,0,9]) linear_extrude(2) text("M", halign="center", valign="center");
-    translate([32.5,0,9]) linear_extrude(2) text("v", halign="center", valign="center");
-    translate([47.5,0,9]) linear_extrude(2) text("2", halign="center", valign="center");
+    translate([2.5,0,9]) linear_extrude(2) text("N", halign="center", valign="center");
+    translate([17.5,0,9]) linear_extrude(2) text("M", halign="center", valign="center");
+    translate([32.5,0,9]) linear_extrude(2) text("ṽ", halign="center", valign="center");
+    translate([47.5,0,9]) linear_extrude(2) text("3", halign="center", valign="center");
     
     // testing
     //translate([0,-500,0]) cube(1000, center=true);
