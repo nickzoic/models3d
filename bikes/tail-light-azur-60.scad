@@ -26,3 +26,10 @@ difference() {
         cylinder(d=mount_d2+1,h=100,center=true);
     }
 }
+
+// first version: it's a little too tight on the seat post, needs a relief slot
+// i had to hammer it on and cut it with a bread knife to get it off!
+// its also a little short, eg: the light is too close to the post
+// and it needs just a smidge more friction on rotation, maybe a rubber o-ring?
+// but not bad.
+// maybe make the stem really long so it can be held vertical and charged in-place?
