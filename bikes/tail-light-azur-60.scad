@@ -7,21 +7,26 @@ length = 30;
 
 // rear end of the thing
 end_dia = 20;
-end_offs = 10;
-length2 = 60;
+end_offs1 = 0;
+end_offs2 = 10;
+length2 = 70;
 
 // mount for light
 mount_d1 = 16;
 mount_h1 = 3;
 mount_d2 = 9;
 mount_h2 = 3;
-hole_dia = 5;
+hole_dia = 7;
 
 thick = 2;
 
+ctw = 4.5;
+ctt = 2.5;
 
 outside_dia = seat_post_dia + thick * 2;
-offset = -10;
+offset = -15;
+
+slot = 12.5;
 
 rotate([0,180-seat_tube_angle,0])
 difference() {
@@ -30,9 +35,9 @@ difference() {
         //rotate([0,seat_tube_angle,0])
             //cylinder(d1=outside_dia, d2=end_dia, h=length2);
         rotate([0,seat_tube_angle,0]) {
-            translate([end_offs/2,0,length2-1])
+            translate([end_offs1,0,length2-1])
                 cylinder(d=end_dia, h=1);
-            translate([-end_offs/2,0,length2-1])
+            translate([-end_offs2,0,length2-1])
                 cylinder(d=end_dia, h=1);
         }
             
@@ -43,12 +48,12 @@ difference() {
         cylinder(d=mount_d2+1,h=200);
         cylinder(d=hole_dia,h=200,center=true);
         
-        translate([0,0,length2-mount_h1-mount_h2]) cube([4,100,2],center=true);
+        translate([-end_offs2/2,0,length2-mount_h1-mount_h2-ctt/2]) cube([ctw,100,ctt],center=true);
         //translate([8,0,length2-mount_h1-mount_h2]) cube([4,100,2],center=true);
         //translate([-8,0,length2-mount_h1-mount_h2]) cube([4,100,2],center=true);
         //translate([0,0,length2+5]) cube([100,15,10],center=true);
     }
-    translate([10,0,offset]) cube([seat_post_dia, 1, 100], center=true);
+    translate([slot,0,offset]) cube([seat_post_dia, 1, 100], center=true);
 }
 
 // first version: it's a little too tight on the seat post, needs a relief slot
@@ -59,6 +64,7 @@ difference() {
 // maybe make the stem really long so it can be held vertical and charged in-place?
 
 // second version: cable tie hole is a smidge too small and needs to be up 1mm: on top of the mount not centered on it.
+// cable tie is a tiny bit in the way of the on/off button
 // fit on post is pretty good
 // screwdriver hole is a bit small and it's quite fiddly as a
 // result
