@@ -4,8 +4,8 @@ difference() {
 
     // exterior
     hull() {
-        translate([-55,0,0]) cylinder(d=20,h=6,center=true);
-        translate([55,0,0]) cylinder(d=20,h=6,center=true);
+        translate([10,0,0]) cylinder(d=20,h=4,center=true);
+        translate([55,0,0]) cylinder(d=20,h=4,center=true);
     }
     
     
@@ -15,5 +15,9 @@ difference() {
     }
     
     // label
-    translate([-22.5,0,2]) linear_extrude(2) text("NMv3", halign="center", valign="center");
+    translate([17.5,0,1]) linear_extrude(2) text("N", halign="center", valign="center");
+    // label
+    translate([32.5,0,1]) linear_extrude(2) text("M", halign="center", valign="center");
+    // label
+    translate([47.5,0,1]) linear_extrude(2) text("4", halign="center", valign="center");
 }
