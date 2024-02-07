@@ -1,5 +1,10 @@
 $fn=100;
 
+// print in translucent PLA.
+
+// go ahead, mess with these and make
+// your own weird looking rock.
+
 pp = [
    [0,-20,0],
    [-20,0,0],
