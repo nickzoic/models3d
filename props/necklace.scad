@@ -7,50 +7,53 @@ $fn=100;
 
 pp = [
    [0,-20,15],
-   [-20,0,15],
-   [10,10,10],
+   [-12.5,0,15],
+   [5,10,10],
    
    [0,20,25],
-   [15,0,25],
-   [-10,-10,25],
-   [15,-12.5,30],
+   [10,0,25],
+   [-5,-10,25],
+   [10,-12.5,30],
    
    [0,0,40],
-   [-20,0,40],
-   [15,15,35],
+   [-7.5,0,40],
+   [10,15,35],
+   [15,0,30],
    
     [0,-25,55],
-   [-15,5,55],
+   [-17,2,50],
    [15,15,50],
-   [15,-15,55],
+   [10,-15,55],
    
    [0,0,70],
 ];
 
-   
-
 difference() {
-    cylinder(d=41,h=27);
-    cylinder(d=39,h=25);
-    cylinder(d=33,h=28);
-    translate([0,0,3]) rotate([90,0,0]) cylinder(d=4,h=100, center=true);
-    translate([0,0,3]) rotate([0,90,0]) cylinder(d=4,h=100, center=true);
-}
-difference() {
-    hull() {
+  union() {
+    difference() {
+      hull() {
         cylinder(d=41, h=1);
         for (p = pp) {
-            translate(p) sphere(10);
+            translate(p) sphere(7);
         }
+      }
+      difference() {
+          hull() {
+            cylinder(d=39, h=1);
+            for (p = pp) {
+                translate(p) sphere(6.5);
+            }
+          }
+    translate([0,0,4]) rotate([90,0,0])cylinder(d=7,h=46, center=true);
+}      
     }
-    hull() {
-        for (p = pp) {
-            translate(p) sphere(9);
-        }
-    }
-    cylinder(d=39, h=25);
-translate([0,0,3]) rotate([90,0,0]) cylinder(d=4,h=100, center=true);
-translate([0,0,3]) rotate([0,90,0]) cylinder(d=4,h=100, center=true);
+    cylinder(d=41,h=27);
+ //   translate([0,0,4]) rotate([90,0,0])cylinder(d=7,h=46, center=true);
+
+  }
+  cylinder(d=39, h=25);
+  cylinder(d=33, h=28);
+  translate([0,0,4]) rotate([90,0,0]) cylinder(d=5,h=100, center=true);
 
     //cube(100);
 }
