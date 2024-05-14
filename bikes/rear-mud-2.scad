@@ -38,7 +38,7 @@ module extrusion(length) {
                 cylinder(d=al_thick_edge, h=length, center=true, $fn=64);        
 }
 
-$fn=100;
+$fn=200;
 
 upper_mount_height = 50;
 lower_mount_height = 10;
@@ -49,19 +49,35 @@ module upper_mount() {
         translate([-al_width/2,-50,upper_mount_height/2]) rotate([0,30,0]) cube([100,100,upper_mount_height]);
         translate([0, -seatpost_offset/2-seatpost_dia/2]) cylinder (d=seatpost_dia, h=upper_mount_height*2, center=true);        
         rotate([17,0,0]) translate([0, seatpost_offset/2+al_radius_1]) cylinder(r=al_radius_1, h=upper_mount_height*2, center=true);
-       for (z = [-5, -17])
+        
+        // two cable ties
+       for (z = [-4, -18])
         translate([0,-seatpost_offset/2-seatpost_dia/2, z])
            rotate_extrude() {
-            translate([seatpost_dia/2+4,0]) square([3,6], center=true);
+            translate([seatpost_dia/2+5,0]) square([2,5], center=true);
         }
        /*for (z = [20, 8])
            for (a = [-14, 14])
                 #translate([0,al_radius_1,z]) rotate([17,0,a])
        rotate([90,0,0]) cylinder(d=3,h=al_radius_1+seatpost_offset);*/
       
-     translate([0,al_radius_1,7]) rotate([107,0,0]) cylinder(d=3.5, h=al_radius_1+seatpost_offset); 
+      // M5 nylock nut and screw.
+     translate([0,al_radius_1,6]) rotate([107,0,0]) cylinder(d=5, h=al_radius_1+seatpost_offset);
+     translate([0,al_radius_1,6]) rotate([107,0,0]) translate([0,0,al_radius_1+seatpost_offset-12]) cylinder(d=8.5, $fn=6, h=20);
+     
         }
 }
+module lower_mount() {
+    difference() {
+        cube([al_width, 10, 25], center=true);
+        translate([0,al_radius_1-2,0]) rotate([10,0,0]) cylinder(r=al_radius_1, h=100, center=true);
+        
+        translate([0,0,5.5]) rotate([90,0,0]) cylinder(d=5, h=20, center=true);
+    }
+}
+
 
 upper_mount();
+translate([0,25,-12.5]) lower_mount();
+
 //extrusion(100);
