@@ -1,27 +1,23 @@
 include <../saturnalia/gears.scad>
 
-gp = 2; // gear pitch
-gt = 14; // gear teeth
-zz = 8;  // thickness
+// glue the round servo horn into this so
+// this sits as close as possible to the 
+// servo body
 
-sht = 2;
-shd = 21;
-sid = 10;
+gp = 1; // gear pitch
+gt = 25; // gear teeth
+zz = 6;  // thickness
+
+sht = 3.5; // servo horn shaft thickness
+shd = 9; // servo horn shaft diameter
+sod = 21; // servo horn outer diameter
 
 difference() {
     union() {
         spur_gear(gp,gt,zz,zz);
-        cylinder(d=gp*gt*.777,h=zz);
+        cylinder(d=sod+2,h=zz);
     }
-    translate([0,0,zz-sht])
-        cylinder(d=shd,h=sht+1);
-    translate([0,0,-1]) cylinder(d=sid, h=zz+2);
-    for (a=[-7,+7]) {
-        for (b=[-3.5,0,+3.5]) {
-            translate([a,b,-1])
-                cylinder(d=1,h=zz+2);
-            translate([b,a,-1])
-                cylinder(d=1,h=zz+2);
-        }
-    }
+    translate([0,0,sht])
+        cylinder(d=sod,h=zz);
+    cylinder(d=shd,h=zz);
 }
