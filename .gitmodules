@@ -1,0 +1,15 @@
+[submodule "lib/threadlib"]
+	path = lib/threadlib
+	url = https://github.com/adrianschlatter/threadlib
+[submodule "lib/scad-utils"]
+	path = lib/scad-utils
+	url = https://github.com/openscad/scad-utils
+[submodule "lib/list-comprehension-demos"]
+	path = lib/list-comprehension-demos
+	url = https://github.com/openscad/list-comprehension-demos
+[submodule "lib/IoP-satellite"]
+	path = lib/IoP-satellite
+	url = https://github.com/MisterHW/IoP-satellite
+[submodule "lib/gears"]
+	path = lib/gears
+	url = https://github.com/chrisspen/gears
