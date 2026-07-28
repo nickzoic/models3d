@@ -1,17 +1,16 @@
 // notes from version 1
-// * print it thicker, more like 15mm
-// * stepper offset is 8mm not 7mm so gear too loose
-// * sleeve fit & taper is all wrong.
-// * motor shaft cutout too thick
+// * print it thicker, more like 15mm [tick]
+// * stepper offset is 8mm not 7mm so gear too loose [tick]
+// * sleeve fit & taper is all wrong. [half a tick]
+// * motor shaft cutout too thick [tick]
 // at least the motor fits nicely.
 
 include <../saturnalia/gears.scad>;
 
 id = 39;
-
 gp = 1;
 gt = 50;
-
+/*
 for(x=[0,50]) translate([x,0,0]) {
 intersection() {
     difference() {
@@ -39,38 +38,47 @@ translate([100,0,0]) {
         }
     }
 }
-
+*/
 translate([0,50,0]) {
+    difference() {
     intersection() {
         union() {
-            spur_gear(1, 50, 10, 5.5, optimized=true);
-            translate([2.5,0,5]) cube([1.5,6,10],center=true);
-            translate([-2.5,0,5]) cube([1.5,6,10],center=true);
+            spur_gear(1, 50, 10, 5.5, optimized=false);
+            difference() {
+                cylinder(d=20,h=12);
+                cylinder(d=15,h=12);
+            }
+            #translate([2.5,0,5]) cube([2,6,10],center=true);
+            #translate([-2.5,0,5]) cube([2,6,10],center=true);
         }
         union() {
+            cylinder(d=20,h=20);
             cylinder(d1=48,d2=70,h=5);
             translate([0,0,5]) cylinder(d1=70,d2=48,h=5);
         }
     }
-    cylinder(d=6,h=2);
+    translate([10,0,9]) linear_extrude(2) text("2");
+}
 }
 
 translate([55,50,0])
 difference() {
     hull() {
-        cylinder(d=50,h=10);
-        translate([37,0,0]) cylinder(d=45,h=10);
+        cylinder(d=50,h=15);
+        translate([37,0,0]) cylinder(d=45,h=15);
     }
-    cylinder(d1=42.5,d2=42,h=10);
-    cylinder(d1=44.5,d2=42.5,h=1);
-    translate([43,0,0]) cylinder(d=28.5,h=10);
-    translate([43,0,0]) cylinder(d1=30.5,d2=28.5,h=1);
-    translate([30,0,5]) cube([10,18,10],center=true);
-    translate([30,0,8]) cube([14,9,4],center=true);
+    cylinder(d1=45,d2=42,h=15);
+    cylinder(d1=46,d2=45,h=1);
+    translate([42,0,0]) cylinder(d=28.5,h=15);
+    translate([42,0,0]) cylinder(d1=30.5,d2=28.5,h=1);
+    #translate([30,0,7.5]) cube([10,18,15],center=true);
+    translate([30,0,13]) cube([14,9,4],center=true);
     
-    translate([43,17.25,0]) cylinder(d=3.5,h=10);
-    translate([43,-17.25,0]) cylinder(d=3.5,h=10);
-    translate([23,18,0]) cube([6,3,10]);
+    translate([42,17.25,2]) cylinder(d=3.5,h=15);
+    translate([42,-17.25,2]) cylinder(d=3.5,h=15);
+    translate([23,17,0]) cube([2,5,15]);
+    translate([18,17,0]) cube([2,5,15]);
+    translate([20,-17,14]) linear_extrude(2) text("2");
 }
 
 motor_diameter = 28;
