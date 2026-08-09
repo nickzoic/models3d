@@ -5,38 +5,25 @@
 // * motor shaft cutout too thick [tick]
 // at least the motor fits nicely.
 
-// notes from version 2
+// notes from version 3
 // * the taper on the lens mount is the wrong way up.  
-//   Hopefully it'll work anyway.
-// * no taper piece
-// * not much clearance for motor wires.
+//   Hopefully it'll work anyway. (fixed)
+// * not much clearance for motor wires (turned 45)
+// * taper could go down 1/2 mm (done)
+// * added features for IR stall detection
 
 include <../saturnalia/gears.scad>;
 
 id = 39;
 gp = 1;
 gt = 50;
-/*
-for(x=[0,50]) translate([x,0,0]) {
-intersection() {
-    difference() {
-        cylinder(d1=42.5,d2=42,h=10);
-        cylinder(d=39,h=10);
-        cylinder(d1=41,d2=39,h=1);
-        translate([0,0,5]) rotate([0,0,45]) cube([41/sqrt(2),41/sqrt(2),10],center=true);
-        translate([0,0,5]) cube([41/sqrt(2),41/sqrt(2),10],center=true);
-        translate([0,1,5]) cube([1,42,10],center=true);
-    }
-    cylinder(d1=60, d2=40,h=10);
-}
-}
 
-translate([100,0,0]) {
+translate([110,0,0]) {
     intersection() {
         difference() {
             spur_gear(1, 50, 10, 10, optimized=false);
-            cylinder(d1=42.5,d2=42,h=10);
-            cylinder(d1=44.5,d2=42.5,h=1);
+            cylinder(d1=44,d2=42,h=10);
+            cylinder(d1=46,d2=44,h=1);
         }
         union() {
             cylinder(d1=48,d2=70,h=5);
@@ -44,21 +31,33 @@ translate([100,0,0]) {
         }
     }
 }
-*/
+
 
 difference() {
     union() {
         cylinder(d=50,h=2);
-        translate([0,0,2]) cylinder(d1=45,d2=42,h=15);
+        translate([0,0,2]) cylinder(d1=44.5,d2=41.5,h=15);
     }
     cylinder(d=39,h=17);
-    cylinder(d1=41,d2=39,h=1);
-    translate([0,0,16]) cylinder(d1=39,d2=41,h=1);
+    //cylinder(d1=41,d2=39,h=1);
+    //translate([0,0,16]) cylinder(d1=39,d2=41,h=1);
     translate([-1,-25,0]) cube([2,50,17]);
 }
-/*
+
+translate([55,-10,0])
+difference() {
+    union() {
+        cylinder(d=50,h=2);
+        translate([0,0,2]) cylinder(d1=43.5,d2=41.5,h=10);
+    }
+    cylinder(d=39,h=17);
+    //cylinder(d1=41,d2=39,h=1);
+    //translate([0,0,11]) cylinder(d1=39,d2=41,h=1);
+    translate([-1,-25,0]) cube([2,50,17]);
+}
+
 translate([0,55,0]) {
-    difference() {
+  difference() {
     intersection() {
         union() {
             spur_gear(1, 50, 10, 5.5, optimized=false);
@@ -74,11 +73,17 @@ translate([0,55,0]) {
             cylinder(d1=48,d2=70,h=5);
             translate([0,0,5]) cylinder(d1=70,d2=48,h=5);
         }
+        
+      }
+    for (a=[0:60:359]) {
+        for(x=[-9:9]) {
+            rotate([0,0,a+x]) translate([15,0,9]) cylinder(d=5,h=2);
+        }
     }
-    translate([10,0,9]) linear_extrude(2) text("2");
+    translate([10,10,1]) rotate([180,0,0]) linear_extrude(2) text("4");
+  }
 }
-}
-*/
+
 
 module stepper_cutout() {
    translate([8,0,0]) cylinder(d=28.5,h=19);
@@ -98,21 +103,21 @@ difference() {
     hull() {
         cylinder(d=50,h=15);
         translate([50,0,0]) rotate([0,0,135]) translate([8,0,0]) cylinder(d=45,h=15);
+    translate([50,0,0]) rotate([0,0,25]) #translate([0,-15,0]) cylinder(d=10,h=15);
+    translate([50,0,0]) rotate([0,0,65]) #translate([0,-15,0]) cylinder(d=10,h=15);
+    
     }
     cylinder(d1=42,d2=45,h=15);
     translate([0,0,14]) cylinder(d1=45,d2=47,h=1);
+    translate([50,0,0]) rotate([0,0,25]) translate([0,-15,0]) cylinder(d=5.25,h=15);
+    translate([50,0,0]) rotate([0,0,65]) translate([0,-15,0]) cylinder(d=5.25,h=15);
+    translate([50,0,0]) rotate([0,0,25]) translate([0,-15,0]) cylinder(d=6.25,h=5);
+    translate([50,0,0]) rotate([0,0,65]) translate([0,-15,0]) cylinder(d=6.25,h=5);
+    
     
     translate([50,0,15]) rotate([180,0,135]) stepper_cutout();
+    
     //translate([20,22,0]) cube([5,2,15]);
-    translate([23,-18,14]) linear_extrude(2) text("3");
+    translate([23,-18,14]) linear_extrude(2) text("4");
 }
 
-motor_diameter = 28;
-motor_ear_width = 34.5;
-motor_ear_screw = 3.5;
-motor_shaft_offset = 7;
-shaft_diameter = 5.5;
-shaft_length = 6;
-shaft_flat = 3.5;
-pilot_diameter = 9.6;
-pilot_depth = 2;
