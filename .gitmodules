@@ -13,3 +13,6 @@
 [submodule "lib/gears"]
 	path = lib/gears
 	url = https://github.com/chrisspen/gears
+[submodule "lib/openscad-polyhedra"]
+	path = lib/openscad-polyhedra
+	url = https://github.com/benjamin-edward-morgan/openscad-polyhedra
