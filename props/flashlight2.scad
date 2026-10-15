@@ -36,7 +36,7 @@ difference() {
     
         translate([0,0,40]) cylinder(d=41,h=130);
     translate([0,0,63]) cylinder(d1=41,d2=43,h=2);
-    cube(1000);
+    //cube(1000);
 }
 
 difference() {
@@ -57,5 +57,5 @@ difference() {
     linear_extrude(2) text("V", halign="center", size=12.5);
     rotate([0,0,30]) translate([0,-12,1]) rotate([180,0,0]) 
     linear_extrude(2) text("S", halign="center", size=10);
-        cube(1000);
+        //cube(1000);
 }

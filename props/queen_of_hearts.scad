@@ -9,14 +9,22 @@ smidge=.1;
 //
 intersection() {
     difference() {
-        scale([2,1,2])
+        scale([2,1.5,2])
         oneHeart();
-        cylinder(h=150,d=21,center=true);
-        translate([45,0,100]) rotate([-90,0,0]) {
+        cylinder(h=225,d=20.5,center=true);
+        translate([50,0,100]) rotate([-90,0,0]) {
             cylinder(d1=5,d2=0,h=2.5);
             cylinder(d=2.2,h=10);
         }
-        translate([-45,0,100]) rotate([-90,0,0]) {
+        translate([-50,0,100]) rotate([-90,0,0]) {
+            cylinder(d1=5,d2=0,h=2.5);
+            cylinder(d=2.2,h=10);
+        }
+        translate([35,0,50]) rotate([-90,0,0]) {
+            cylinder(d1=5,d2=0,h=2.5);
+            cylinder(d=2.2,h=10);
+        }
+        translate([-35,0,50]) rotate([-90,0,0]) {
             cylinder(d1=5,d2=0,h=2.5);
             cylinder(d=2.2,h=10);
         }

@@ -1,4 +1,4 @@
-$fn=180;
+$fn=90;
 
 
 difference() {
@@ -22,5 +22,19 @@ difference() {
     }
     rotate_extrude() {
         translate([25,0]) circle(d=3);
+    }
+    translate([0,0,-8])
+    rotate_extrude() {
+        translate([20,0]) circle(d=3);
+    }
+    rotate([0,0,-70])
+        translate([0,0,8])
+    rotate_extrude(angle=135) {
+        translate([20,0]) circle(d=3);
+    }
+    rotate([0,0,+115])
+        translate([0,0,8])
+    rotate_extrude(angle=135) {
+        translate([20,0]) circle(d=3);
     }
 }

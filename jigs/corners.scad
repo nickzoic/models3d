@@ -20,8 +20,8 @@ module piece(radius, label, thick=2) {
 
 for (a=[2, 3,4,5,6,7,8,9,10]) {
     translate([0, 1.5*a*a, 0]) piece(a,str(a));
-    rotate([0,0,180])
-    translate([-80, 1.5*a*a-170, 0]) piece(a+0.5,str(a,"½"));
+    //rotate([0,0,180])
+    //translate([-80, 1.5*a*a-170, 0]) piece(a+0.5,str(a,"½"));
 }
 
 //translate([60,0,0]) piece(2);

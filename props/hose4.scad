@@ -22,9 +22,9 @@ difference() {
     translate([-15,0,0]) cylinder(d=13.5,h=20);
     translate([-15,0,0]) cylinder(d=10,h=32.5);
     
-    translate([0,0,27.5]) cylinder(d=10,h=20);
-    translate([0,0,35]) cylinder(d=13.5,h=20);
-    translate([0,0,53]) cylinder(d1=13.5,d2=16.5,h=2);
+    translate([0,0,32.5]) cylinder(d=10,h=20);
+    translate([0,0,40]) cylinder(d=13.5,h=20);
+    translate([0,0,58]) cylinder(d1=13.5,d2=16.5,h=2);
     hull() {
         translate([-15,0,32.5]) sphere(d=10);
         translate([15,0,32.5]) sphere(d=10);
@@ -39,5 +39,5 @@ difference() {
         translate([0,0,43]) rotate_extrude()  translate([12,a]) circle(d=2, $fn=12);
     }
     
-    cube(100);
+    //cube(100);
 }

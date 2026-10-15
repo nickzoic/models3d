@@ -16,3 +16,6 @@
 [submodule "lib/openscad-polyhedra"]
 	path = lib/openscad-polyhedra
 	url = https://github.com/benjamin-edward-morgan/openscad-polyhedra
+[submodule "lib/BOSL2"]
+	path = lib/BOSL2
+	url = https://github.com/BelfrySCAD/BOSL2/
